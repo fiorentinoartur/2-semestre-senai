@@ -5,6 +5,10 @@ nome do modelo do carro
 e o nome do modelo do carro
 */
 
+CREATE DATABASE Exercicio_1_2
+
+USE Exercicio_1_2
+
 SELECT
  Aluguel.IdAluguel,Cliente.Nome, Modelo.Nome
 FROM
