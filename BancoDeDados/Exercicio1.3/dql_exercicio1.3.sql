@@ -8,7 +8,7 @@ listar todos os veterinários (nome e CRMV) de uma clínica (razão social)
 - listar todos os atendimentos mostrando o nome do veterinário que atendeu, o nome, a raça e o tipo do pet que foi atendido, 
 o nome do dono do pet e o nome da clínica onde o pet foi atendido
 */
-
+USE ClinicaPet
 INSERT INTO Raca(Descricao)
 VALUES('Shiba')
  
@@ -49,3 +49,5 @@ inner join Raca on Pet.IdRaca = Raca.IdRaca
 inner join TipoPet on Pet.IdTipoPet = TipoPet.IdTipoPet
 inner join Dono on Pet.IdDono = Dono.IdDono
 inner join Clinica on Veterinario.IdClinica = Clinica.IdClinica
+
+SELECT * FROM Raca

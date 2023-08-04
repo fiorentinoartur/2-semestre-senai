@@ -1,7 +1,7 @@
 --DML INSERIR OS DADOS NAS TABELAS
 
 --USAR O BANCO
-USE Exercicio_1_3
+USE ClinicaPet
 
 --INSERIR DADOS NAS TABELAS
 INSERT INTO Clinica(Endereco)
@@ -23,7 +23,7 @@ INSERT INTO Pet(IdTipoPet,IdRaca,IdDono,Nome,DataNascimento)
 VALUES(1,1,1,'Fred','15/02/15'),(2,2,2,'Max','04/06/14')
 
 INSERT INTO Atendimentos(IdVeterinario,IdPet,Descricao,_Data)
-VALUES(1,3,'Raio X','21/05/23'),(2,4,'Coleta','10/07/22')
+VALUES(1,1,'Raio X','21/05/23'),(2,2,'Coleta','10/07/22')
 
 
 
