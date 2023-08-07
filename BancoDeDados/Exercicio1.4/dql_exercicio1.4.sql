@@ -4,8 +4,8 @@
 - listar todos os álbuns lançados após o um determinado ano de lançamento
 - listar os dados de um usuário através do e-mail e senha
 - listar todos os álbuns ativos, mostrando o nome do artista e os estilos do álbum 
-*/                                                                         
-
+*/  
+USE Optus
 SELECT
 Usuarios.IdUsuarios,Usuarios.Permissao,Usuarios.Nome,Usuarios.Email
 FROM
@@ -14,11 +14,11 @@ Where
 Usuarios.Permissao = 'adm';
 
 SELECT
-Albuns.IdAlbum, Albuns.DataLancamento
+Albuns.IdAlbum, Albuns.DataLancamento,Albuns.Titulo
 FROM
 Albuns
 Where
-Albuns.DataLancamento = '20/02/2023';
+Albuns.DataLancamento BETWEEN '2023-01-01'  AND '2024-02-01';
 
 
 SELECT 
@@ -39,4 +39,3 @@ inner join AlbunsEstilos on Albuns.IdAlbum= AlbunsEstilos.IdEstilo
 SELECT * FROM  Usuarios
 SELECT * FROM  Albuns
 
-ALTER TABLE 
