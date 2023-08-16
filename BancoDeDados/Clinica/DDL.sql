@@ -1,8 +1,8 @@
 --DDL DATA DEFINITION LANGUAGE
+drop DATABASE FioreLife
+CREATE DATABASE FioreLife
 
-CREATE DATABASE HealthClinic
-
-USE HealthClinic
+USE FioreLife
 
 CREATE TABLE TipoDeUsuario
 (
@@ -25,7 +25,8 @@ CREATE TABLE Usuario
 IdUsuario INT PRIMARY KEY IDENTITY,
 IdTipoDeUsuario INT FOREIGN KEY REFERENCES TipoDeUsuario(IdTipoDeUsuario) NOT NULL,
 Email VARCHAR(256) UNIQUE NOT NULL,
-Senha VARCHAR(256) NOT NULL
+Senha VARCHAR(256) NOT NULL,
+DataNascimento DATE NOT NULL
 )
 CREATE TABLE Especialidade
 (
@@ -67,13 +68,15 @@ IdPresencaConsulta INT FOREIGN KEY REFERENCES PresencaConsulta(IdPresencaConsult
 IdMedico INT FOREIGN KEY REFERENCES Medico(IdMedico) NOT NULL,
 IdProntuario INT FOREIGN KEY REFERENCES Prontuario(IdProntuario) NOT NULL,
 IdClinica INT FOREIGN KEY REFERENCES Clinica(IdClinica) NOT NULL,
-DataConsulta DATE NOT NULL
+DataConsulta DATE NOT NULL,
+HoraConsulta TIME NOT NULL
+
 )
+
 CREATE TABLE FeedBacks
 (
 IdFeedBacks INT PRIMARY KEY IDENTITY,
 IdConsulta INT FOREIGN KEY REFERENCES Consulta(IdConsulta) NOT NULL,
 Descricao VARCHAR(256) NOT NULL
 )
-
 

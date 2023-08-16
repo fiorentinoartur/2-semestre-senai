@@ -2,7 +2,7 @@
 
 INSERT INTO TipoDeUsuario VALUES('Administrador'),('Paciente'),('Médico')
 
-INSERT INTO Usuario VALUES(3,'medico@health.com','1234'),(2,'paciente@health.com','4567')
+INSERT INTO Usuario VALUES(3,'medico@health.com','1234','1980-08-03'),(2,'paciente@health.com','4567','2006-12-15')
 
 INSERT INTO Paciente VALUES(2,'Artur','49957976885')
 
@@ -12,11 +12,11 @@ INSERT INTO Especialidade VALUES('Pediatra'),('Oftalmologista')
 
 INSERT INTO Medico VALUES(1,1,1,'Carlão','536768')
 
-INSERT INTO PresencaConsulta VALUES(2,1)
+INSERT INTO PresencaConsulta VALUES(1,1)
 
 INSERT INTO Prontuario VALUES('Infecção na garganta')
 
-INSERT INTO Consulta VALUES(2,2,1,1,'2023-08-31')
+INSERT INTO Consulta VALUES(1,1,1,1,'2023-08-31','09:00:00')
 
 INSERT INTO FeedBacks VALUES(2,'Exelente atendimento, ótimos profissionais!!!.')
 
