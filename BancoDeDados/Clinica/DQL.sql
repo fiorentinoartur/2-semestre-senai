@@ -1,6 +1,6 @@
 --DQL
-
-CREATE FUNCTION QtdMedico(@IdEspecialidade INT)
+--drop database FioreLife
+/*CREATE FUNCTION QtdMedico(@IdEspecialidade INT)
 RETURNS TABLE
 AS 
 RETURN
@@ -14,22 +14,54 @@ where Medico.IdEspecialidade = @IdEspecialidade
 )
 
 SELECT * FROM QtdMedico(1)
-SELECT * FROM Medico
-DROP FUNCTION QtdMedico
 
+SELECT Paciente.IdPaciente
+FROM Usuario.Nome AS Paciente
+     JOIN Usuario.Nome AS Medico
+       ON (Paciente.IdUsuario= Medico.IdUsuario)
+WHERE Medico.IdUsuario = Tip;
+
+SELECT Usuario.Nome
+FROM Paciente.IdUsuario AS Paciente
+     JOIN Medico.IdUsuario AS Medico
+       ON (Prd1.ListPrice = Prd2.ListPrice)
+WHERE Prd2.[Name] = 'Chainring Bolts';
+SELECT * FROM Medico
+*/
 
 SELECT 
-Consulta.IdConsulta,Consulta.DataConsulta,Consulta.HoraConsulta,Clinica.NomeFantasia AS [Clínica],Paciente.Nome AS [Paciente],Medico.Nome AS [Médico],
-Especialidade.Titulo AS[Especialidade],Medico.CRM,Prontuario.Descricao AS [Prontuário],FeedBacks.Descricao AS [FeedBack]
+	Consulta.IdConsulta,
+	Consulta.DataConsulta,
+	Consulta.HoraConsulta,
+	Clinica.NomeFantasia AS [Clínica],
+	UsuarioPaciente.Nome AS UsuarioPaciente,
+	UsuarioMedico.Nome AS UsuarioMedico,
+	Especialidade.Titulo AS[Especialidade],
+	Medico.CRM,Prontuario.Descricao AS [Prontuário],
+	FeedBacks.Descricao AS [FeedBack]
 FROM
-Consulta
-left join Clinica on Clinica.IdClinica = Consulta.IdClinica
-left join Paciente on Paciente.IdPaciente = Consulta.IdPresencaConsulta
-left join Medico on Medico.IdMedico = Consulta.IdMedico
-left join Especialidade on Especialidade.IdEspecialidade = Medico.IdEspecialidade
-left join Prontuario on Prontuario.IdProntuario = Consulta.IdProntuario
-left join FeedBacks on Prontuario.IdProntuario = FeedBacks.IdFeedBacks
+	Consulta
 
+	left join Paciente 
+	on Paciente.IdPaciente = Consulta.IdPaciente
 
+	left join Usuario as UsuarioPaciente
+	on Paciente.IdUsuario = UsuarioPaciente.IdUsuario
 
+	left join Clinica 
+	on Clinica.IdClinica = Consulta.IdClinica
 
+	left join Medico 
+	on Medico.IdClinica = Clinica.IdClinica
+
+	LEFT join Usuario as UsuarioMedico 
+	on Medico.IdUsuario = UsuarioMedico.IdUsuario
+
+	left join Especialidade 
+	on Especialidade.IdEspecialidade = Medico.IdEspecialidade
+
+	left join Prontuario 
+	on Prontuario.IdProntuario = Consulta.IdProntuario
+
+	left join FeedBacks 
+	on Prontuario.IdProntuario = FeedBacks.IdFeedBacks
