@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Controller\" />
-    <Folder Include="Domains\" />
-    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
 </Project>
