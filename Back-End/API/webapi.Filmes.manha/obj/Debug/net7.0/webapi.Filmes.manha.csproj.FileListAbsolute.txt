@@ -24,3 +24,10 @@ C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\o
 C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\obj\Debug\net7.0\webapi.Filmes.manha.pdb
 C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\obj\Debug\net7.0\webapi.Filmes.manha.genruntimeconfig.cache
 C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\obj\Debug\net7.0\ref\webapi.Filmes.manha.dll
+C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\System.Data.SqlClient.dll
+C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\runtimes\win-arm64\native\sni.dll
+C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\runtimes\win-x64\native\sni.dll
+C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\runtimes\win-x86\native\sni.dll
+C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\obj\Debug\net7.0\webapi.Filmes.manha.csproj.CopyComplete
