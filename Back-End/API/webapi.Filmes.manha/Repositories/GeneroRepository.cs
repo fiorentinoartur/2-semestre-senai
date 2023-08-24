@@ -32,9 +32,28 @@ namespace webapi.Filmes.manha.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Cadastrar um novo gênero
+        /// </summary>
+        /// <param name="novoGenero">Objeto com as informações que serão cadastradas</param>
         public void Cadastrar(GeneroDomains novoGenero)
         {
-            throw new NotImplementedException();
+            //Declara a conexão passando a string de conexão como parâmetro 
+           using(SqlConnection con = new SqlConnection(stringConexao))
+            { 
+                //Declara a query que será executada 
+              string queryInsert = "INSERT INTO Genero(Nome) VALUES('"+ novoGenero.Nome +"')";
+
+                //Declara o SqlCommand passando  query que será executada e a conexão com o bd
+                using (SqlCommand cmd = new SqlCommand(queryInsert, con))
+                {
+                    //Abre a conexão com o banco de dados
+                    con.Open();
+
+                    //executar a query  (queryInsert)
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public void Deletar(int id)
