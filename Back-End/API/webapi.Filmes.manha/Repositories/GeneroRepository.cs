@@ -42,11 +42,13 @@ namespace webapi.Filmes.manha.Repositories
            using(SqlConnection con = new SqlConnection(stringConexao))
             { 
                 //Declara a query que será executada 
-              string queryInsert = "INSERT INTO Genero(Nome) VALUES('"+ novoGenero.Nome +"')";
+              string queryInsert = $"INSERT INTO Genero(Nome) VALUES(@Nome)";
 
                 //Declara o SqlCommand passando  query que será executada e a conexão com o bd
                 using (SqlCommand cmd = new SqlCommand(queryInsert, con))
                 {
+                  //Pasa o valor do parâmetro @Nome
+                    cmd.Parameters.AddWithValue("@Nome", novoGenero.Nome);
                     //Abre a conexão com o banco de dados
                     con.Open();
 
@@ -56,17 +58,29 @@ namespace webapi.Filmes.manha.Repositories
             }
         }
 
-        public void Deletar(int id)
+        public void Deletar(int idGenero)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryDelete = $"Delete FROM Genero WHERE IdGenero = (@idGenero)";
+
+                using(SqlCommand cmd = new SqlCommand(queryDelete,con))
+                {
+                    cmd.Parameters.AddWithValue("@idGenero", idGenero);
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
-        /// <summary>
-        /// Listar todos os objetos generos 
-        /// </summary>
-        /// <returns>Lista de objetos (gêneros) </returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public List<GeneroDomains> ListarTodos()
+    /// <summary>
+    /// Listar todos os objetos generos 
+    /// </summary>
+    /// <returns>Lista de objetos (gêneros) </returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public List<GeneroDomains> ListarTodos()
         {
             //Cria uma lista de objetos do tipo gênero
             List<GeneroDomains> listaGeneros = new List<GeneroDomains>();

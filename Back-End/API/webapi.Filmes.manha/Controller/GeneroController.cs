@@ -78,6 +78,21 @@ namespace webapi.Filmes.manha.Controller
                 return BadRequest(e.Message);
             }
         }
+        [HttpDelete("{idGenero}")]
+
+        public IActionResult Delete(int idGenero)
+        {
+            try
+            {
+                _generoRepository.Deletar(idGenero);
+
+                return Ok(idGenero);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
     }
 }
