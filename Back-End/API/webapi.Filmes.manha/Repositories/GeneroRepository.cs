@@ -29,7 +29,7 @@ namespace webapi.Filmes.manha.Repositories
 
         public GeneroDomains BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+  
         }
 
         /// <summary>
@@ -58,6 +58,10 @@ namespace webapi.Filmes.manha.Repositories
             }
         }
 
+        /// <summary>
+        /// Deletar um determinado gênero através do id
+        /// </summary>
+        /// <param name="idGenero">Id do objeto a ser deletado</param>
         public void Deletar(int idGenero)
         {
             using (SqlConnection con = new SqlConnection(stringConexao))
