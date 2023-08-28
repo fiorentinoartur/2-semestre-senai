@@ -55,6 +55,27 @@ namespace webapi.Filmes.manha.Controller
             }
 
         }
+        [HttpGet("{idGenero}")]
+
+        public IActionResult Get(int idGenero)
+    {
+        try
+        {
+            GeneroDomains listaGenero = _generoRepository.BuscarPorId( idGenero);
+
+                if (listaGenero == null)
+                {
+                    return NotFound("Nenhum gênero foi encontrado");
+                }
+
+                return Ok(listaGenero);
+            
+        }
+        catch(Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
         /// <summary>
         /// Endpoint para cadastro que aciona o método e cadastra gênero
         /// </summary>
@@ -87,6 +108,22 @@ namespace webapi.Filmes.manha.Controller
                 _generoRepository.Deletar(idGenero);
 
                 return Ok(idGenero);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut]
+
+        public IActionResult Put(GeneroDomains genero)
+        {
+            try
+            {
+                _generoRepository.AtualizarIdCorpo(genero);
+
+                return Ok(genero);
             }
             catch (Exception e)
             {

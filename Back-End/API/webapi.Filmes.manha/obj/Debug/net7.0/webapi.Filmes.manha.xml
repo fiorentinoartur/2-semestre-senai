@@ -86,11 +86,24 @@
                -SqlServer: User Id = sa ; Pwd = Senha
             </summary>
         </member>
+        <member name="M:webapi.Filmes.manha.Repositories.GeneroRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Buscar um gênero através do Id
+            </summary>
+            <param name="id">Id do gênero a ser buscado</param>
+            <returns>Objeto buscado ou null caso não seja encontrado</returns>
+        </member>
         <member name="M:webapi.Filmes.manha.Repositories.GeneroRepository.Cadastrar(webapi.Filmes.manha.Domains.GeneroDomains)">
             <summary>
             Cadastrar um novo gênero
             </summary>
             <param name="novoGenero">Objeto com as informações que serão cadastradas</param>
+        </member>
+        <member name="M:webapi.Filmes.manha.Repositories.GeneroRepository.Deletar(System.Int32)">
+            <summary>
+            Deletar um determinado gênero através do id
+            </summary>
+            <param name="idGenero">Id do objeto a ser deletado</param>
         </member>
         <member name="M:webapi.Filmes.manha.Repositories.GeneroRepository.ListarTodos">
             <summary>

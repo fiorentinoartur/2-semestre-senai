@@ -15,5 +15,7 @@ IdFilme INT PRIMARY KEY IDENTITY,
 IdGenero INT FOREIGN KEY REFERENCES Genero(IdGenero) NOT NULL,
 Titulo VARCHAR(50) NOT NULL 
 )
-
+delete from Genero where IdGenero = 2;
 select * from Genero
+
+drop table Filme
