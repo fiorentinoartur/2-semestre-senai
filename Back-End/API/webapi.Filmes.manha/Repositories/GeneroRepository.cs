@@ -24,7 +24,8 @@ namespace webapi.Filmes.manha.Repositories
             {
                 string queryUpdate = "UPDATE Genero SET Nome = @Nome WHERE  IdGenero = @IdGenero";
 
-                
+
+               
 
                 using (SqlCommand cmd = new SqlCommand(queryUpdate, con))
                 {
@@ -38,9 +39,22 @@ namespace webapi.Filmes.manha.Repositories
             }
         }
 
-        public void AtualizarIdUrl(int id, GeneroDomains genero)
+        public void AtualizarIdUrl(GeneroDomains genero, int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryUpdate = "UPDATE Genero SET Nome = @Nome WHERE IdGenero = @IdGenero";
+
+
+                using (SqlCommand cmd = new SqlCommand(queryUpdate, con))
+                {
+                    cmd.Parameters.AddWithValue("@Nome", genero.Nome);
+                    cmd.Parameters.AddWithValue("@IdGenero", genero.IdGenero);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
         }
 
         /// <summary>

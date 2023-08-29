@@ -58,10 +58,10 @@ namespace webapi.Filmes.manha.Controller
         [HttpGet("{idGenero}")]
 
         public IActionResult Get(int idGenero)
-    {
-        try
         {
-            GeneroDomains listaGenero = _generoRepository.BuscarPorId( idGenero);
+            try
+            {
+                GeneroDomains listaGenero = _generoRepository.BuscarPorId(idGenero);
 
                 if (listaGenero == null)
                 {
@@ -69,13 +69,13 @@ namespace webapi.Filmes.manha.Controller
                 }
 
                 return Ok(listaGenero);
-            
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
         /// <summary>
         /// Endpoint para cadastro que aciona o método e cadastra gênero
         /// </summary>
@@ -87,11 +87,11 @@ namespace webapi.Filmes.manha.Controller
             try
             {
 
-            //Fazendo a chamada para o método cadastrar passando o objeto como parâmetro
-            _generoRepository.Cadastrar(novoGenero);
+                //Fazendo a chamada para o método cadastrar passando o objeto como parâmetro
+                _generoRepository.Cadastrar(novoGenero);
 
-            //Retorna um status code 201 - Created
-            return Ok(novoGenero);
+                //Retorna um status code 201 - Created
+                return Ok(novoGenero);
             }
             catch (Exception e)
             {
@@ -129,6 +129,59 @@ namespace webapi.Filmes.manha.Controller
             {
                 return BadRequest(e.Message);
             }
+        }
+        /*
+         * [HttpPut]
+
+        public IActionResult Put(GeneroDomains genero)
+        {
+            try
+            {
+              GeneroDomains generoBuscado = _generoRepository.BuscarPorId(genero.IdGenero);
+
+             if (generoBuscado != null)
+                {
+                    try
+                    {
+                        _generoRepository.AtualizarIdCorpo(generoBuscado);
+
+                        return StatusCode(200);
+                    }
+                  catch(Exception e)
+                    {
+                        return BadRequest(e.Message);
+                    }
+                }
+                return NotFound("Gênero não encontrado");
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        } 
+         */
+
+        [HttpPut("{idGenero}")]
+                public IActionResult Put(GeneroDomains genero, int idGenero)
+        {
+            try
+            {
+             GeneroDomains generoAtualizado  =   _generoRepository.BuscarPorId(idGenero);
+
+                if(generoAtualizado == null)
+                {
+                    return NotFound("Nenhum gênero foi encontrado");
+                }
+
+                genero.IdGenero = idGenero;
+
+                _generoRepository.AtualizarIdUrl(genero, idGenero);
+
+                return Ok(generoAtualizado);
+            }
+            catch(Exception e)
+            { return BadRequest(e.Message); }
         }
 
     }

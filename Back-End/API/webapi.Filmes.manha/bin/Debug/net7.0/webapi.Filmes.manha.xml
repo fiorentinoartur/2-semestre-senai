@@ -4,6 +4,11 @@
         <name>webapi.Filmes.manha</name>
     </assembly>
     <members>
+        <member name="P:webapi.Filmes.manha.Controller.FilmesController._repositoryFilme">
+            <summary>
+            Objeto _generoRepository que irá receber todos os métodos definidos na interface IGeneroRepository
+            </summary>
+        </member>
         <member name="P:webapi.Filmes.manha.Controller.GeneroController._generoRepository">
             <summary>
             Objeto _generoRepository que irá receber todos os métodos definidos na interface IGeneroRepository
@@ -56,14 +61,12 @@
             </summary>
             <param name="genero">Objeto  atualizado (novas informações)</param>
         </member>
-        <member name="M:webapi.Filmes.manha.Interfaces.IGeneroRepository.AtualizarIdUrl(System.Int32,webapi.Filmes.manha.Domains.GeneroDomains)">
+        <member name="M:webapi.Filmes.manha.Interfaces.IGeneroRepository.Deletar(System.Int32)">
             <summary>
             Atualizar objeto existente passando se id pela Url
             </summary>
             <param name="id">Id do objeto que será atualizado</param>
             <param name="genero">Objeto atualizado(novas informações)</param>
-        </member>
-        <member name="M:webapi.Filmes.manha.Interfaces.IGeneroRepository.Deletar(System.Int32)">
             <summary>
             Deletar um objeto
             </summary>
@@ -75,6 +78,16 @@
             </summary>
             <param name="id">Id do objeto a ser buscado</param>
             <returns>Objeto buscado</returns>
+        </member>
+        <member name="F:webapi.Filmes.manha.Repositories.FilmeRepository.stringConexao">
+            <summary>
+            String de conexão com o banco de dados que recebe os seguintes parâmetros:
+            Data Source: Nome do servidor
+            Initial Catalog: Nome do Banco de dados
+            Autenticação: 
+               -Windows: Integrated Security = true
+               -SqlServer: User Id = sa ; Pwd = Senha
+            </summary>
         </member>
         <member name="F:webapi.Filmes.manha.Repositories.GeneroRepository.stringConexao">
             <summary>

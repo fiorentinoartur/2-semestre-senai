@@ -34,7 +34,6 @@ namespace webapi.Filmes.manha.Interfaces
         /// </summary>
         /// <param name="id">Id do objeto que será atualizado</param>
         /// <param name="genero">Objeto atualizado(novas informações)</param>
-        void AtualizarIdUrl(int id, GeneroDomains genero);
 
         /// <summary>
         /// Deletar um objeto
@@ -48,7 +47,6 @@ namespace webapi.Filmes.manha.Interfaces
         /// <param name="id">Id do objeto a ser buscado</param>
         /// <returns>Objeto buscado</returns>
         GeneroDomains BuscarPorId(int id);
-
-
+        void AtualizarIdUrl(GeneroDomains genero, int id);
     }
 }
