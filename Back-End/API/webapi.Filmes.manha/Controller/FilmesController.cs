@@ -42,6 +42,24 @@ namespace webapi.Filmes.manha.Controller
                 return BadRequest(e.Message);
             }
         }
+        [HttpGet("{idFilme}")]
+
+        public IActionResult Get(int idFilme)
+        {
+            try
+            {
+                FilmeDomain listaFilme = _filmeRepository.BuscarPorId(idFilme);
+                if(listaFilme == null)
+                {
+                    return NotFound("Nenhum filme foi encontrado");
+                }
+                return Ok(listaFilme);
+            }
+            catch(Exception e) 
+            {
+            return  BadRequest(e.Message);            
+            }
+        }
 
         [HttpPost]
 
@@ -75,6 +93,43 @@ namespace webapi.Filmes.manha.Controller
             {
                 return BadRequest(e.Message);
             }
+        }
+
+        [HttpPut]
+
+        public IActionResult Put(FilmeDomain filme)
+        {
+            try
+            {
+            _filmeRepository.AtulizarIdCorpo(filme);
+
+            return Ok(filme);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpPut("{idFilme}")]
+        public IActionResult Put(FilmeDomain Filme, int idFilme)
+        {
+            try
+            {
+                FilmeDomain FilmeAtualizado = _filmeRepository.BuscarPorId(idFilme);
+
+                if (FilmeAtualizado == null)
+                {
+                    return NotFound("Nenhum filme foi encontrado");
+                }
+
+                Filme.IdFilme = idFilme;
+
+                _filmeRepository.AtualizarUrl( idFilme, Filme);
+
+                return Ok(FilmeAtualizado);
+            }
+            catch (Exception e)
+            { return BadRequest(e.Message); }
         }
     }
 }

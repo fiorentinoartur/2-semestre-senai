@@ -15,19 +15,16 @@ namespace webapi.Filmes.manha.Repositories
         ///    -SqlServer: User Id = sa ; Pwd = Senha
         /// </summary>
 
-        private string stringConexao = "Data Source = NOTE14-S14; Initial Catalog = Filmes_Manha; User Id = sa; Pwd = Senai@134";
-        public void AtualizarUrl(int id, FilmeDomain filme)
-        {
-            throw new NotImplementedException();
-        }
+        //  private string stringConexao = "Data Source = NOTE14-S14; Initial Catalog = Filmes_Manha; User Id = sa; Pwd = Senai@134";
+        private string stringConexao = "Data Source = ARTUR; Initial Catalog = Filmes; User Id = sa; Pwd = Arcos@2020";
 
-        public void AtulizarIdCorpo(FilmeDomain filme)
+        public void AtualizarUrl(int id, FilmeDomain filme)
         {
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-                string queryUpdate = "UPDATE Filme SET Nome = @Titulo WHERE IdFilme = @IdFilme";
+                string queryUpdate = "UPDATE Filme SET Titulo = @Titulo WHERE IdFilme = @IdFilme";
 
-                using (SqlCommand cmd = new SqlCommand(queryUpdate,con))
+                using (SqlCommand cmd = new SqlCommand(queryUpdate, con))
                 {
                     cmd.Parameters.AddWithValue("@Titulo", filme.Titulo);
                     cmd.Parameters.AddWithValue("@IdFilme", filme.IdFilme);
@@ -37,9 +34,20 @@ namespace webapi.Filmes.manha.Repositories
             }
         }
 
-        public FilmeDomain BuscarPorId(int id)
+        public void AtulizarIdCorpo(FilmeDomain filme)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryUpdate = "UPDATE Filme SET Titulo = @Titulo WHERE IdFilme = @IdFilme";
+
+                using (SqlCommand cmd = new SqlCommand(queryUpdate, con))
+                {
+                    cmd.Parameters.AddWithValue("@Titulo", filme.Titulo);
+                    cmd.Parameters.AddWithValue("@IdFilme", filme.IdFilme);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public void Cadastrar(FilmeDomain novoFilme)
@@ -77,6 +85,49 @@ namespace webapi.Filmes.manha.Repositories
             }
         }
 
+        public FilmeDomain BuscarPorId(int id)
+        {
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string querySelectById = "SELECT IdFilme,Filme.IdGenero,Filme.Titulo," +
+                                         "Genero.Nome From Filme JOIN Genero ON Filme.IdGenero" +
+                                          " = Genero.IdGenero WHERE IdFilme = @IdFilme";
+
+                con.Open();
+
+                SqlDataReader rdr;
+
+                using (SqlCommand cmd = new SqlCommand(querySelectById, con)) 
+                {
+                    cmd.Parameters.AddWithValue("@IdFilme", id);
+
+                    rdr = cmd.ExecuteReader();
+                    if(rdr.Read())
+                    {
+                        FilmeDomain filmeBuscado = new FilmeDomain()
+                        {
+                            //Atribui a propriedade IdFilme o valor recebido no rdr
+                            IdFilme = Convert.ToInt32(rdr[0]),
+
+                            //Atribi a propriedade nome o valor recebido rdr
+                            Titulo = rdr["Titulo"].ToString(),
+
+                            IdGenero = Convert.ToInt32(rdr["IdGenero"]),
+
+                            Genero = new GeneroDomains()
+                            {
+                                IdGenero = Convert.ToInt32(rdr["IdGenero"]),
+
+                                Nome = rdr["Nome"].ToString()
+                            }
+                        };
+                            return filmeBuscado;
+                    }
+                    return null;
+                }
+            }
+        }
+
         public List<FilmeDomain> ListarTodos()
         {
             //Cria uma lista de objetos
@@ -96,12 +147,12 @@ namespace webapi.Filmes.manha.Repositories
                 SqlDataReader rdr;
 
                 //Declaração o SqlCommand passando a query que será executada e a conexão
-                using (SqlCommand cmd = new SqlCommand(querySelectAll,con))
+                using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
                 {
                     //Executa a query e armazena os dados na rdr
                     rdr = cmd.ExecuteReader();
 
-                    while(rdr.Read())
+                    while (rdr.Read())
                     {
                         FilmeDomain filmes = new FilmeDomain()
                         {
@@ -111,7 +162,7 @@ namespace webapi.Filmes.manha.Repositories
                             //Atribi a propriedade nome o valor recebido rdr
                             Titulo = rdr["Titulo"].ToString(),
 
-                            IdGenero= Convert.ToInt32(rdr["IdGenero"]),
+                            IdGenero = Convert.ToInt32(rdr["IdGenero"]),
 
                             Genero = new GeneroDomains()
                             {
@@ -120,8 +171,8 @@ namespace webapi.Filmes.manha.Repositories
                                 Nome = rdr["Nome"].ToString()
                             }
                         };
-                    //Adiciona cada objeto dentro da lista
-                    listaFilmes.Add(filmes);
+                        //Adiciona cada objeto dentro da lista
+                        listaFilmes.Add(filmes);
                     }
                 }
             }
