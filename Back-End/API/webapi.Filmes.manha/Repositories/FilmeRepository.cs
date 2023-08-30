@@ -15,7 +15,7 @@ namespace webapi.Filmes.manha.Repositories
         ///    -SqlServer: User Id = sa ; Pwd = Senha
         /// </summary>
 
-        private string stringConexao = "Data Source = NOTE14-S14; Intial Catalog = Filmes_Manha; User Id = sa; Pwd = Senai@134";
+        private string stringConexao = "Data Source = NOTE14-S14; Initial Catalog = Filmes_Manha; User Id = sa; Pwd = Senai@134";
         public void AtualizarUrl(int id, FilmeDomain filme)
         {
             throw new NotImplementedException();
@@ -23,7 +23,18 @@ namespace webapi.Filmes.manha.Repositories
 
         public void AtulizarIdCorpo(FilmeDomain filme)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryUpdate = "UPDATE Filme SET Nome = @Titulo WHERE IdFilme = @IdFilme";
+
+                using (SqlCommand cmd = new SqlCommand(queryUpdate,con))
+                {
+                    cmd.Parameters.AddWithValue("@Titulo", filme.Titulo);
+                    cmd.Parameters.AddWithValue("@IdFilme", filme.IdFilme);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public FilmeDomain BuscarPorId(int id)
@@ -35,7 +46,7 @@ namespace webapi.Filmes.manha.Repositories
         {
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-                string queryInsert = "INSERT INTO Genero VALUES(@IdGenero, @Titulo)";
+                string queryInsert = "INSERT INTO Filme VALUES(@IdGenero, @Titulo)";
 
                 con.Open();
 
@@ -49,14 +60,72 @@ namespace webapi.Filmes.manha.Repositories
             }
         }
 
-        public void Deletar(int id)
+        public void Deletar(int idFilme)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryDelete = $"Delete FROM Filme WHERE IdFilme = (@IdFilme)";
+
+                using (SqlCommand cmd = new SqlCommand(queryDelete, con))
+                {
+                    cmd.Parameters.AddWithValue("@IdFilme", idFilme);
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public List<FilmeDomain> ListarTodos()
         {
-            throw new NotImplementedException();
+            //Cria uma lista de objetos
+
+            List<FilmeDomain> listaFilmes = new List<FilmeDomain>();
+
+            //DEclara a SqlConnection passando a string de conexão como argumento
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                //Declara a instrução a ser usada
+                string querySelectAll = "SELECT IdFilme,Filme.IdGenero,Filme.Titulo,Genero.Nome From Filme JOIN Genero ON Filme.IdGenero = Genero.IdGenero";
+
+                //Abre a conexão
+                con.Open();
+
+                //Declara o SqldataReader para percorrer a tb do bd
+                SqlDataReader rdr;
+
+                //Declaração o SqlCommand passando a query que será executada e a conexão
+                using (SqlCommand cmd = new SqlCommand(querySelectAll,con))
+                {
+                    //Executa a query e armazena os dados na rdr
+                    rdr = cmd.ExecuteReader();
+
+                    while(rdr.Read())
+                    {
+                        FilmeDomain filmes = new FilmeDomain()
+                        {
+                            //Atribui a propriedade IdFilme o valor recebido no rdr
+                            IdFilme = Convert.ToInt32(rdr[0]),
+
+                            //Atribi a propriedade nome o valor recebido rdr
+                            Titulo = rdr["Titulo"].ToString(),
+
+                            IdGenero= Convert.ToInt32(rdr["IdGenero"]),
+
+                            Genero = new GeneroDomains()
+                            {
+                                IdGenero = Convert.ToInt32(rdr["IdGenero"]),
+
+                                Nome = rdr["Nome"].ToString()
+                            }
+                        };
+                    //Adiciona cada objeto dentro da lista
+                    listaFilmes.Add(filmes);
+                    }
+                }
+            }
+            return listaFilmes;
         }
     }
 }
