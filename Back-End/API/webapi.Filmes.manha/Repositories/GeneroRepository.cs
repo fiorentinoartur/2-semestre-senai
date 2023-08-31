@@ -16,8 +16,8 @@ namespace webapi.Filmes.manha.Repositories
         ///    -Windows: Integrated Security = true
         ///    -SqlServer: User Id = sa ; Pwd = Senha
         /// </summary>
-        //private string stringConexao = "Data Source = NOTE14-S14; Initial Catalog = Filmes_Manha; User Id = sa; Pwd = Senai@134";
-        private string stringConexao = "Data Source = ARTUR; Initial Catalog = Filmes; User Id = sa; Pwd = Arcos@2020";
+        private string stringConexao = "Data Source = NOTE14-S14; Initial Catalog = Filmes_Manha; User Id = sa; Pwd = Senai@134";
+        //private string stringConexao = "Data Source = ARTUR; Initial Catalog = Filmes; User Id = sa; Pwd = Arcos@2020";
         //Integrated Security = true
         public void AtualizarIdCorpo(GeneroDomains genero)
         {
