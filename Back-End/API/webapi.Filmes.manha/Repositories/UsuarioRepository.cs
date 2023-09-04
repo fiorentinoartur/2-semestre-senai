@@ -11,7 +11,7 @@ namespace webapi.Filmes.manha.Repositories
         {
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-                string querySelect = "SELECT IdUsuario, Email,Senha,  Permissao  FROM USUARIO WHERE Email = @Email AND Senha = @Senha";
+                string querySelect = "SELECT IdUsuario, Email,  Permissao  FROM USUARIO WHERE Email = @Email AND Senha = @Senha";
 
                 con.Open();
 
@@ -30,7 +30,6 @@ namespace webapi.Filmes.manha.Repositories
                         {
                             IdUsuario = Convert.ToInt32(rdr["IdUsuario"]),
                             Email = rdr["Email"].ToString(),
-                            Senha = rdr["Senha"].ToString(),
                             Permissao = Convert.ToBoolean(rdr["Permissao"])
                         };
                         return usuarioBuscado;
