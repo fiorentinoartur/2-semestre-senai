@@ -6,7 +6,8 @@ namespace webapi.Filmes.manha.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private string stringConexao = "Data Source = NOTE14-S14; Initial Catalog = Filmes_Manha; User Id = sa; Pwd = Senai@134 ";
+       // private string stringConexao = "Data Source = NOTE14-S14; Initial Catalog = Filmes_Manha; User Id = sa; Pwd = Senai@134 ";
+        private string stringConexao = "Data Source = ARTUR; Initial Catalog = Filmes; User Id = sa; Pwd = Arcos@2020";
         public UsuarioDomain Login(string Email, string Senha)
         {
             using (SqlConnection con = new SqlConnection(stringConexao))

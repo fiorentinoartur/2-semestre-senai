@@ -86,3 +86,11 @@ C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\b
 C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\webapi.Filmes.manha\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
