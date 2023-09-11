@@ -18,7 +18,7 @@ namespace senai.inlock.webApi.Controllers
             _jogoRepository = new JogoRepository();
         }
 
-        [HttpGet]
+        [HttpPut]
         public IActionResult Get()
         {
             try
@@ -32,7 +32,7 @@ namespace senai.inlock.webApi.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        
         [HttpPost]
         public IActionResult Post(JogoDomain jogo)
         {
@@ -48,6 +48,20 @@ namespace senai.inlock.webApi.Controllers
                 return BadRequest(e.Message);
                     }
             
+        }
+        [HttpGet]
+        public IActionResult Gett()
+        {
+            try
+            {
+
+                List<JogoDomain> buscarJogo = _jogoRepository.ListarJogos();
+                return Ok(buscarJogo);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }
