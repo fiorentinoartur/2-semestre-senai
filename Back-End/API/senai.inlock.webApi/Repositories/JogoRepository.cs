@@ -11,9 +11,9 @@ namespace senai.inlock.webApi.Repositories
 {
     public class JogoRepository : IJogo
     {
-        //private string stringConexao = "Data Source = NOTE14-S14; Initial Catalog = Inlock_Games; User Id = sa; Pwd = Senai@134";
+        private string stringConexao = "Data Source = NOTE14-S14; Initial Catalog = Inlock_Games; User Id = sa; Pwd = Senai@134";
 
-         private string stringConexao = "Data Source = ARTUR; Initial Catalog = InLock_Games; User Id = sa; Pwd = Arcos@2020";
+         //private string stringConexao = "Data Source = ARTUR; Initial Catalog = InLock_Games; User Id = sa; Pwd = Arcos@2020";
         public void Cadastrar(JogoDomain jogo)
         {
             using(SqlConnection con = new SqlConnection(stringConexao))
@@ -37,44 +37,8 @@ namespace senai.inlock.webApi.Repositories
             }
         }
 
-        public List<JogoDomain> ListarJogos()
-        {
-            List<JogoDomain> listaJogo = new List<JogoDomain>();
-
-
-            using (SqlConnection con = new SqlConnection(stringConexao))
-            {
-                string querySelectAll = $"SELECT Estudio.Nome AS Estudio,Jogo.Nome As Jogo FROM Estudio INNER JOIN Jogo ON Estudio.IdEstudio = Jogo.IdEstudio ORDER BY Estudio.Nome, Jogo.Nome";
-
-                SqlDataReader rdr;
-
-                con.Open();
-
-                using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
-                {
-                    rdr = cmd.ExecuteReader();
-
-                    while (rdr.Read())
-                    {
-
-
-                        JogoDomain jogo = new JogoDomain()
-                        {
-                            Nome = rdr["Jogo"].ToString(),
-                            Estudio = new EstudioDomain()
-                            {
-                                Nome = rdr["Estudio"].ToString()
-                            }
-
-                        };
-
-                        listaJogo.Add(jogo);
-
-                    }
-                }
-            return listaJogo;
-            }
-        }
+      
+        
 
         public List<JogoDomain> ListarTodos()
         {
@@ -95,9 +59,9 @@ namespace senai.inlock.webApi.Repositories
 
                     while (rdr.Read())
                     {
-                        DateTime dataLancamento = Convert.ToDateTime(rdr["DataLancamento"]);
-                        DateOnly dataLancamentoDateOnly = new DateOnly(dataLancamento.Year, dataLancamento.Month, dataLancamento.Day);
-                       string dataFormatada = dataLancamentoDateOnly.ToString("dd/MM/yyyy");
+                        //DateTime dataLancamento = dataLancamentoDateOnly
+                      //  DateOnly dataLancamentoDateOnly = new DateOnly(dataLancamento.Year, dataLancamento.Month, dataLancamento.Day);
+                   //    string dataFormatada = dataLancamentoDateOnly.ToString("dd/MM/yyyy");
                         JogoDomain jogo = new JogoDomain()
                         {
                             IdJogo = Convert.ToInt32(rdr["IdJogo"]),
@@ -106,9 +70,9 @@ namespace senai.inlock.webApi.Repositories
 
                             Descricao = rdr["Descricao"].ToString(),
 
-                            DataLancamento = dataLancamentoDateOnly,
+                            DataLancamento = Convert.ToDateTime(rdr["DataLancamento"]) ,
 
-                            Valor = Convert.ToByte(rdr["Valor"]),
+                            Valor = Convert.ToDouble(rdr["Valor"]),
                
                         
                             Estudio = new EstudioDomain()
@@ -124,5 +88,6 @@ namespace senai.inlock.webApi.Repositories
             }
             return listaJogos;
         }
+
     }
 }

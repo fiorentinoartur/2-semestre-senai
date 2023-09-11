@@ -22,8 +22,8 @@ namespace senai.inlock.webApi.Controllers
             try
             {
 
-            List<EstudioDomain> buscarJogo = _estudioRepository.ListarTodos();
-            return Ok(buscarJogo);
+            List<EstudioDomain> buscarEstudio = _estudioRepository.ListarTodos();
+            return Ok(buscarEstudio);
             }
             catch (Exception e) 
             { 

@@ -6,13 +6,13 @@ namespace senai.inlock.webApi.Repositories
 {
     public class EstudioRepository : IEstudio
     {
-        //private string stringConexao = "Data Source = NOTE14-S14; Initial Catalog = Inlock_Games; User Id = sa; Pwd = Senai@134";
+        private string stringConexao = "Data Source = NOTE14-S14; Initial Catalog = Inlock_Games; User Id = sa; Pwd = Senai@134";
 
-        private string stringConexao = "Data Source = ARTUR; Initial Catalog = InLock_Games; User Id = sa; Pwd = Arcos@2020";
+       // private string stringConexao = "Data Source = ARTUR; Initial Catalog = InLock_Games; User Id = sa; Pwd = Arcos@2020";
         public List<EstudioDomain> ListarTodos()
         {
             List<EstudioDomain> listaEstudio = new List<EstudioDomain>();
-            List<JogoDomain> listaJogo = new List<JogoDomain>();
+           // List<JogoDomain> listaJogo = new List<JogoDomain>();
 
 
             using (SqlConnection con = new SqlConnection(stringConexao))
@@ -29,20 +29,19 @@ namespace senai.inlock.webApi.Repositories
 
                     while (rdr.Read())
                     {
+         
 
 
-                        JogoDomain jogo = new JogoDomain()
+                        EstudioDomain Estudio = new EstudioDomain()
                         {
-                            Nome = rdr["Jogo"].ToString(),
-                            Estudio = new EstudioDomain()
-                            {
-                                Nome = rdr["Estudio"].ToString()
-                            }
+                            Nome = rdr["Estudio"].ToString(),
+                          
 
                         };
 
-                        listaJogo.Add(jogo);
-
+                        listaEstudio.Add(Estudio);
+   
+                        
                     }
                 }
             }

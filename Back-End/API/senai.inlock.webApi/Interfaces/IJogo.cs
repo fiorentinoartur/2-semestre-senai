@@ -6,7 +6,6 @@ namespace senai.inlock.webApi.Interfaces
     {
 
         List<JogoDomain> ListarTodos();
-        List<JogoDomain> ListarJogos();
 
         void Cadastrar(JogoDomain jogo);
     }
