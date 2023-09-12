@@ -37,3 +37,8 @@ CREATE TABLE Usuario
 	,Senha VARCHAR (100) NOT NULL
 );
 GO
+SELECT * FROM TiposUsuario
+SELECT * FROM Usuario
+
+SELECT IdUsuario, Email,Titulo FROM Usuario INNER JOIN TiposUsuario ON Usuario.IdTipoUsuario = TiposUsuario.IdTipoUsuario 
+WHERE Email = 'cliente@cliente.com'  AND Senha = 'cliente'

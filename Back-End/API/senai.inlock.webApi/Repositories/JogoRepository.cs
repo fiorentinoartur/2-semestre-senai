@@ -59,8 +59,8 @@ namespace senai.inlock.webApi.Repositories
 
                     while (rdr.Read())
                     {
-                        //DateTime dataLancamento = dataLancamentoDateOnly
-                      //  DateOnly dataLancamentoDateOnly = new DateOnly(dataLancamento.Year, dataLancamento.Month, dataLancamento.Day);
+                        DateTime dataLancamento = Convert.ToDateTime(rdr["DataLancamento"]);
+                        DateOnly dataLancamentoDateOnly = new DateOnly(dataLancamento.Year, dataLancamento.Month, dataLancamento.Day);
                    //    string dataFormatada = dataLancamentoDateOnly.ToString("dd/MM/yyyy");
                         JogoDomain jogo = new JogoDomain()
                         {
@@ -70,7 +70,7 @@ namespace senai.inlock.webApi.Repositories
 
                             Descricao = rdr["Descricao"].ToString(),
 
-                            DataLancamento = Convert.ToDateTime(rdr["DataLancamento"]) ,
+                            DataLancamento = dataLancamentoDateOnly  ,
 
                             Valor = Convert.ToDouble(rdr["Valor"]),
                

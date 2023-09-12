@@ -14,7 +14,7 @@ namespace senai.inlock.webApi_.Domains
         public string Nome { get; set; }
         public string Descricao { get; set; }
       
-        public DateTime DataLancamento { get; set; }
+        public DateOnly DataLancamento { get; set; }
         public Double Valor { get; set; }
         public EstudioDomain Estudio { get; set; }
 
