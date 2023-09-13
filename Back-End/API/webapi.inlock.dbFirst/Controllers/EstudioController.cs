@@ -32,8 +32,9 @@ namespace webapi.inlock.dbFirst.Controllers
                 return BadRequest(e.Message);
             }
         }
+      
 
-        [HttpGet("{ListarComJogos}")]
+        [HttpGet("ListarJogos")]
         public IActionResult GetWhiteGames()
         {
             try
@@ -44,6 +45,59 @@ namespace webapi.inlock.dbFirst.Controllers
             catch (Exception e)
             {
                 return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id) 
+        {
+            try
+            {
+            return Ok(_estudioRepository.BuscarPorId(id));
+
+            }
+            catch(Exception e) 
+            {
+            return BadRequest($"{e.Message}");  
+            }
+        }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteById(Guid id) 
+        { 
+        try
+            {
+                _estudioRepository.Deletar(id);
+                return StatusCode(204);
+            }
+            catch(Exception e) 
+            {
+                return BadRequest($"{e.Message}");
+            }
+        }
+        [HttpPost]
+        public IActionResult Post(Estudio estudio)
+        {
+            try
+            {
+                _estudioRepository.Cadastrar(estudio);
+                return Ok(204);
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"{e.Message}");
+            }
+        }
+        [HttpPut]
+        public IActionResult Put(Estudio estudio, Guid id)
+        {
+            try
+            {
+                _estudioRepository.Atualizar(id, estudio);
+                return Ok(204);
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"{e.Message}");
             }
         }
     }
