@@ -11,8 +11,8 @@ namespace webapi.inlock.codeFirst.Domains
 
         [Column(TypeName = "VARCHAR(100)")]
         [Required(ErrorMessage = "Nome do Estúdio Obrigatório!")]
-        public string Nome { get; set; }
+        public string ?Nome { get; set; }
 
-        public List<Jogo> jogos { get; set; }
+        public List<Jogo> ?Jogos { get; set; }
     }
 }

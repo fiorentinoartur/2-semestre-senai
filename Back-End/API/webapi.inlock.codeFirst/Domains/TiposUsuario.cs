@@ -11,7 +11,7 @@ namespace webapi.inlock.codeFirst.Domains
 
         [Column(TypeName = "VARCHAR(50)")]
         [Required(ErrorMessage = "Tipo do usuário obrigatório")]
-        public string Titulo { get; set; }
+        public string ?Titulo { get; set; }
 
 
     }

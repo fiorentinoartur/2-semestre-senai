@@ -13,11 +13,11 @@ namespace webapi.inlock.codeFirst.Domains
 
         [Column(TypeName = "VARCHAR(100)")]
         [Required(ErrorMessage = "O Nome do jogo é obrigatório!")]
-        public string Nome { get; set; }
+        public string ?Nome { get; set; }
 
         [Column(TypeName = "TEXT")]
         [Required(ErrorMessage = "Descrição do jogo é obrigatória!")]
-        public string Descricao { get; set; }
+        public string ?Descricao { get; set; }
 
         [Column(TypeName = "DATE")]
         [Required(ErrorMessage = "Data lancamento obrigatório!")]
@@ -33,6 +33,6 @@ namespace webapi.inlock.codeFirst.Domains
 
         [Required(ErrorMessage = "Informe o estúdio que produziu o jogo")]
         [ForeignKey("IdEstudio")]
-        public Estudio Estudio { get; set; }
+        public Estudio ?Estudio { get; set; }
     }
 }

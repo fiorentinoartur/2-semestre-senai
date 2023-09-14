@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.inlock.codeFirst.Domains
 {
     [Table("Usuario")]
+    [Index(nameof(Email), IsUnique=true)] //Cria um indice único
     public class Usuario
     {
         [Key]
