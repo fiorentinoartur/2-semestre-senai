@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapi.inlock.codeFirst.Contexts;
 
@@ -11,9 +12,11 @@ using webapi.inlock.codeFirst.Contexts;
 namespace webapi.inlock.codeFirst.Migrations
 {
     [DbContext(typeof(InlockContext))]
-    partial class InlockContextModelSnapshot : ModelSnapshot
+    [Migration("20230915113850_BD_v3")]
+    partial class BD_v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -9,7 +9,7 @@ namespace webapi.inlock.codeFirst.Contexts
 
         public DbSet<Estudio> Estudio { get; set; }
         public DbSet<Jogo> Jogo { get; set; }
-        public DbSet<TiposUsuario> TiposUsuarios { get; set; }
+        public DbSet<TiposUsuario> TiposUsuario { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
 
         /// <summary>
