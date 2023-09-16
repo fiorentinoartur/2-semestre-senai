@@ -22,11 +22,11 @@ namespace webapi.inlock.codeFirst.Repositories
         {
             ctx = new InlockContext();
         }
-        public Usuario BuscarUsuario(string email, string senha)
+        public Usuario Login(string email, string senha)
         {
             try {
 
-             Usuario usuarioBuscado =   ctx.Usuario.FirstOrDefault(u => u.Email == email);
+                Usuario usuarioBuscado = ctx.Usuario.FirstOrDefault(u => u.Email == email);
                 if(usuarioBuscado != null)
                 {
                     bool confere = Criptografia.CompararHash(senha, usuarioBuscado.Senha);

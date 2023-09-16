@@ -4,7 +4,7 @@ namespace webapi.inlock.codeFirst.Interfaces
 {
     public interface IUsuarioRepository
     {
-        Usuario BuscarUsuario(string email, string senha);
+        Usuario Login(string email, string senha);
 
         void Cadastrar(Usuario buscarUsuario);
     }

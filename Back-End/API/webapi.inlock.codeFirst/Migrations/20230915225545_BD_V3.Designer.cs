@@ -12,8 +12,8 @@ using webapi.inlock.codeFirst.Contexts;
 namespace webapi.inlock.codeFirst.Migrations
 {
     [DbContext(typeof(InlockContext))]
-    [Migration("20230915113850_BD_v3")]
-    partial class BD_v3
+    [Migration("20230915225545_BD_V3")]
+    partial class BD_V3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

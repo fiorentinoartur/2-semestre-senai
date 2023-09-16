@@ -5,7 +5,7 @@
 namespace webapi.inlock.codeFirst.Migrations
 {
     /// <inheritdoc />
-    public partial class BD_v4 : Migration
+    public partial class BD_V3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -11,3 +11,4 @@ namespace webapi.inlock.codeFirst.ViewModels
         public string Senha { get; set; }
     }
 }
+
