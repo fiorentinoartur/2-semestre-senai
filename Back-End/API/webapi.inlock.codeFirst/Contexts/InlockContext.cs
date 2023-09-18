@@ -18,7 +18,7 @@ namespace webapi.inlock.codeFirst.Contexts
         /// <param name="optionsBuilder">Objeto com as configurações definidas</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = ARTUR; DataBase =inlock_games_codeFirst_Manha; user id = sa; Pwd = Arcos@2020; TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server = NOTE14-S14; DataBase =inlock_games_codeFirst_Manha; user id = sa; Pwd = Senai@134; TrustServerCertificate=True;");
               
             base.OnConfiguring(optionsBuilder);
         }

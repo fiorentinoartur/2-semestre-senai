@@ -153,3 +153,4 @@ C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\A
 C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\webapi.inlock.codeFirst\obj\Debug\net7.0\webapi.inlock.codeFirst.pdb
 C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\webapi.inlock.codeFirst\obj\Debug\net7.0\webapi.inlock.codeFirst.genruntimeconfig.cache
 C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\webapi.inlock.codeFirst\obj\Debug\net7.0\ref\webapi.inlock.codeFirst.dll
+C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\webapi.inlock.codeFirst\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
