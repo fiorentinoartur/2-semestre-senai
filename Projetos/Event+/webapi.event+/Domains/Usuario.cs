@@ -31,6 +31,6 @@ namespace webapi.event_.Domains
         public Guid IdTipoUsuario { get; set; }
 
         [ForeignKey(nameof(IdTipoUsuario))]
-        public TiposUsuario TipoUsuario { get; set; }
+        public TiposUsuario? TipoUsuario { get; set; }
     }
 }

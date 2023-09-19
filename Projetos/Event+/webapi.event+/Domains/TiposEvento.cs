@@ -11,6 +11,6 @@ namespace webapi.event_.Domains
 
         [Column(TypeName = "VARCHAR(100)")]
         [Required(ErrorMessage = "Titulo do evento obrigatório!")]
-        public string Titulo { get; set; }
+        public string? Titulo { get; set; }
     }
 }
