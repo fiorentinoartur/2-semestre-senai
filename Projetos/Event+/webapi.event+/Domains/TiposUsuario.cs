@@ -7,7 +7,7 @@ namespace webapi.event_.Domains
     public class TiposUsuario
     {
         [Key]
-        public Guid IdTipoUsuario { get; set; }
+        public Guid IdTipoUsuario { get; set; } = Guid.NewGuid();
 
         [Column(TypeName = "VARCHAR(100)")]
         [Required(ErrorMessage ="Título do tipo usuário obrigatório!")]

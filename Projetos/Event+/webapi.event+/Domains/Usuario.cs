@@ -10,7 +10,7 @@ namespace webapi.event_.Domains
     public class Usuario
     {
         [Key]
-        public Guid IdUsuario { get; set; }
+        public Guid IdUsuario { get; set; } =  Guid.NewGuid();
 
         [Column(TypeName = "VARCHAR(100)")]
         [Required(ErrorMessage ="Nome do usuário obrigatório!")]

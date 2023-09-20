@@ -7,7 +7,7 @@ namespace webapi.event_.Domains
     public class ComentariosEvento
     {
         [Key]
-        public Guid IdComentarioEvento { get; set; }
+        public Guid IdComentarioEvento { get; set; } = Guid.NewGuid();
 
         [Column(TypeName ="TEXT")]
         [Required(ErrorMessage ="A Descricão é obrigatória")]

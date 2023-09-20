@@ -12,7 +12,7 @@ using webapi.event_.Contexts;
 namespace webapi.event_.Migrations
 {
     [DbContext(typeof(EventContext))]
-    [Migration("20230919113015_BD_V1")]
+    [Migration("20230920112516_BD_V1")]
     partial class BD_V1
     {
         /// <inheritdoc />

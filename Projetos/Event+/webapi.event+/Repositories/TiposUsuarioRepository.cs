@@ -19,7 +19,16 @@ namespace webapi.event_.Repositories
 
         public TiposUsuario BuscarPorId(Guid id)
         {
-            throw new NotImplementedException();
+           TiposUsuario tipoUsuario = _eventContext.TiposUsuario
+                .Select(u => new TiposUsuario
+                {
+                   IdTipoUsuario = u.IdTipoUsuario,
+                   Titulo = u.Titulo,
+           
+                }).FirstOrDefault(u => u.IdTipoUsuario == id)!;
+
+            return tipoUsuario;
+
         }
 
         public void Cadastrar(TiposUsuario tipoUsuario)
@@ -30,7 +39,13 @@ namespace webapi.event_.Repositories
 
         public void Deletar(Guid id)
         {
-            throw new NotImplementedException();
+            TiposUsuario tipoUsuarioBuscado =
+            
+            _eventContext.TiposUsuario.Find(id);
+
+            _eventContext.TiposUsuario.Remove(tipoUsuarioBuscado);
+
+            _eventContext.SaveChanges();
         }
 
         public List<TiposUsuario> Listar()

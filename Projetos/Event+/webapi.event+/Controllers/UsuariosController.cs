@@ -7,6 +7,7 @@ namespace webapi.event_.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class UsuariosController : ControllerBase
     {
         private UsuariosRepository _usuariosRepository { get; set; }

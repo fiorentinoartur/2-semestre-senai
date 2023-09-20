@@ -27,7 +27,7 @@ namespace webapi.event_.Repositories
                     {
                         Titulo = u.TipoUsuario.Titulo
                     }
-                }).FirstOrDefault(u => u.IdUsuario == id);
+                }).FirstOrDefault(u => u.IdUsuario == id)!;
 
                 if(usuario != null)
                 {
@@ -45,7 +45,19 @@ namespace webapi.event_.Repositories
         {
             try
             {
-                Usuario usuarioBuscado = _eventContext.Usuario.FirstOrDefault(u => u.Email == email);
+                Usuario usuarioBuscado = _eventContext.Usuario
+                    .Select(u => new Usuario
+                    {
+                        IdUsuario = u.IdUsuario,
+                        NomeUsuario = u.NomeUsuario,
+                        Email = u.Email,
+                        Senha = u.Senha,
+                        TipoUsuario = new TiposUsuario
+                        {
+                            Titulo = u.TipoUsuario.Titulo
+                        }
+                    }).FirstOrDefault(u => u.Email == email)!;
+
 
                 if(usuarioBuscado != null)
                 {

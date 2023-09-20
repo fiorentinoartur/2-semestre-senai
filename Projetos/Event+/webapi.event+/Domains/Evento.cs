@@ -7,7 +7,7 @@ namespace webapi.event_.Domains
     public class Evento
     {
         [Key]
-        public Guid IdEvento { get; set; }
+        public Guid IdEvento { get; set; } = Guid.NewGuid();
 
         [Column(TypeName = "DATE")]
         [Required(ErrorMessage = "Data do evento obrigatória")]
