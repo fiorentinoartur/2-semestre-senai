@@ -14,11 +14,12 @@ namespace webapi.event_.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = NOTE14-S14; DataBase =webapi.event+_codeFirst_Manha; user id = sa; Pwd = Senai@134; TrustServerCertificate=True;");  
+          /*  optionsBuilder.UseSqlServer("Server = NOTE14-S14; DataBase =webapi.event+_codeFirst_Manha; user id = sa; Pwd = Senai@134; TrustServerCertificate=True;");  
+           *  */
             
             
-         /*   optionsBuilder.UseSqlServer("Server = ARTUR; DataBase =webapi.event+_codeFirst_Manha; user id = sa; Pwd = Arcos@2020; TrustServerCertificate=True;");
-          *   */
+            optionsBuilder.UseSqlServer("Server = ARTUR; DataBase =webapi.event+_codeFirst_Manha; user id = sa; Pwd = Arcos@2020; TrustServerCertificate=True;");
+         
 
             base.OnConfiguring(optionsBuilder);
         }

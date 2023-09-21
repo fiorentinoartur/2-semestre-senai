@@ -4062,19 +4062,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\49957976885\\.nuget\\packages\\": {}
+    "C:\\Users\\Artur Fiorentino\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\49957976885\\Desktop\\2-semestre-senai\\Back-End\\API\\webapi.inlock.dbFirst\\webapi.inlock.dbFirst.csproj",
+      "projectUniqueName": "C:\\Users\\Artur Fiorentino\\OneDrive\\Área de Trabalho\\2-semestre-senai\\Back-End\\API\\webapi.inlock.dbFirst\\webapi.inlock.dbFirst.csproj",
       "projectName": "webapi.inlock.dbFirst",
-      "projectPath": "C:\\Users\\49957976885\\Desktop\\2-semestre-senai\\Back-End\\API\\webapi.inlock.dbFirst\\webapi.inlock.dbFirst.csproj",
-      "packagesPath": "C:\\Users\\49957976885\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\49957976885\\Desktop\\2-semestre-senai\\Back-End\\API\\webapi.inlock.dbFirst\\obj\\",
+      "projectPath": "C:\\Users\\Artur Fiorentino\\OneDrive\\Área de Trabalho\\2-semestre-senai\\Back-End\\API\\webapi.inlock.dbFirst\\webapi.inlock.dbFirst.csproj",
+      "packagesPath": "C:\\Users\\Artur Fiorentino\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Artur Fiorentino\\OneDrive\\Área de Trabalho\\2-semestre-senai\\Back-End\\API\\webapi.inlock.dbFirst\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\49957976885\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Artur Fiorentino\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4082,6 +4087,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4148,7 +4154,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

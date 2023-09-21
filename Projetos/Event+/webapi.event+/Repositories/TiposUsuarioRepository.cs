@@ -14,7 +14,15 @@ namespace webapi.event_.Repositories
         }
         public void Atualizar(Guid id, TiposUsuario tipoUsuario)
         {
-            throw new NotImplementedException();
+            TiposUsuario tipoUsuarioBuscado = _eventContext.TiposUsuario.Find(id);
+
+            if(tipoUsuarioBuscado != null)
+            {
+                tipoUsuarioBuscado.Titulo = tipoUsuario.Titulo;
+            }
+            _eventContext.TiposUsuario.Update(tipoUsuarioBuscado!);
+
+            _eventContext.SaveChanges();
         }
 
         public TiposUsuario BuscarPorId(Guid id)
@@ -50,7 +58,7 @@ namespace webapi.event_.Repositories
 
         public List<TiposUsuario> Listar()
         {
-            throw new NotImplementedException();
+           return _eventContext.TiposUsuario.ToList();
         }
     }
 }

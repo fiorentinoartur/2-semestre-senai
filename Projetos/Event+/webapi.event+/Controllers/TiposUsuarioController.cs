@@ -17,7 +17,19 @@ namespace webapi.event_.Controllers
         {
             _tiposUsuarioRepository = new TiposUsuarioRepository();
         }
+        [HttpGet]
+        public IActionResult Get()
+        {
+            try
+            {
+                return Ok(_tiposUsuarioRepository.Listar());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
 
+        }
         [HttpPost]
         public IActionResult Post(TiposUsuario tiposUsuario)
         {
@@ -27,12 +39,24 @@ namespace webapi.event_.Controllers
                 return StatusCode(201);
             }
             catch (Exception e)
-            
+
             {
                 return BadRequest(e.Message);
             }
         }
-
+        [HttpPut]
+        public IActionResult Put(TiposUsuario tipoUsuario, Guid id)
+        {
+            try
+            {
+                _tiposUsuarioRepository.Atualizar(id, tipoUsuario);
+                return Ok(201);
+            }
+            catch (Exception e) 
+            {
+                return BadRequest(e.Message);
+            }
+        }
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id) 
         {
@@ -49,9 +73,17 @@ namespace webapi.event_.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(Guid id) 
+        public IActionResult GetById(Guid id) 
         {
+            try
+            {
+
             return Ok(_tiposUsuarioRepository.BuscarPorId(id));
+            }
+            catch (Exception e) 
+            {
+                return BadRequest($"{e.Message}");
+            }
         }
     }
 }
