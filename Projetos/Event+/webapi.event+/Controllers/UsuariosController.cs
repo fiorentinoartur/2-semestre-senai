@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.event_.Domains;
 using webapi.event_.Repositories;
@@ -18,6 +19,7 @@ namespace webapi.event_.Controllers
         }
 
         [HttpPost]
+  
         public IActionResult Post(Usuario usuario) 
         {
             try

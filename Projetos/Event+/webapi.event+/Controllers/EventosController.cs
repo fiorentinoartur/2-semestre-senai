@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.event_.Domains;
 using webapi.event_.Interfaces;
@@ -19,7 +20,7 @@ namespace webapi.event_.Controllers
         }
 
         [HttpPost]
-
+        [Authorize(Roles = "Administrador")]
         public IActionResult Post(Evento evento)
         {
             try
@@ -35,6 +36,7 @@ namespace webapi.event_.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Get() 
         { 
         try
@@ -44,6 +46,47 @@ namespace webapi.event_.Controllers
             catch (Exception e) 
             { 
             return BadRequest($"{e.Message}");
+            }
+        }
+        [HttpDelete]
+        [Authorize(Roles ="Administrador")]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                _eventoRepository.Deletar(id);
+                return Ok("Evento exluído com sucesso");
+            }
+            catch (Exception e) 
+            {
+            return BadRequest(e.Message);
+            }
+        }
+        [HttpPut]
+        [Authorize(Roles = "Administrador")]
+        public IActionResult Put(Evento evento, Guid id) 
+        { 
+        try
+            {
+                _eventoRepository.Atualizar(id, evento);
+                return Ok("Evento atualizado com Sucesso!!");
+            }
+            catch(Exception e) 
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpGet("{id}")]
+        [Authorize]
+        public IActionResult GetById(Guid id) 
+        {
+            try
+            {
+ return Ok(_eventoRepository.BuscarPorId(id));
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
     }

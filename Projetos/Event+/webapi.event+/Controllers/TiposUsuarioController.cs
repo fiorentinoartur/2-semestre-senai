@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.event_.Domains;
 using webapi.event_.Interfaces;
@@ -18,6 +19,7 @@ namespace webapi.event_.Controllers
             _tiposUsuarioRepository = new TiposUsuarioRepository();
         }
         [HttpGet]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Get()
         {
             try
@@ -31,6 +33,7 @@ namespace webapi.event_.Controllers
 
         }
         [HttpPost]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Post(TiposUsuario tiposUsuario)
         {
             try
@@ -45,6 +48,7 @@ namespace webapi.event_.Controllers
             }
         }
         [HttpPut]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Put(TiposUsuario tipoUsuario, Guid id)
         {
             try
@@ -58,6 +62,7 @@ namespace webapi.event_.Controllers
             }
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Delete(Guid id) 
         {
          try
@@ -73,6 +78,7 @@ namespace webapi.event_.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult GetById(Guid id) 
         {
             try

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.event_.Domains;
 using webapi.event_.Interfaces;
@@ -18,12 +19,13 @@ namespace webapi.event_.Controllers
             _instituicaoRepository = new InstituicaoRepository();
         }
         [HttpPost]
+        [Authorize(Roles ="Administrador")]
         public IActionResult Post(Instituicao instituicao)
         {
             try
             {
                 _instituicaoRepository.Cadastrar(instituicao);
-                return Ok("Instituição cadastradda com sucesso!!!");
+                return Ok("Instituição cadastrada com sucesso!!!");
             }
             catch (Exception e) 
             { 

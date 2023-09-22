@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.event_.Domains;
 using webapi.event_.Interfaces;
@@ -18,12 +19,14 @@ namespace webapi.event_.Controllers
             _tiposEventoRepository = new TiposEventoRepository();
         }
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
             return Ok(_tiposEventoRepository.Listar());
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Post(TiposEvento tipoEvento)
         {
             try
@@ -39,6 +42,7 @@ namespace webapi.event_.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrador")]
 
         public IActionResult Delete(Guid id)
         {
@@ -54,6 +58,7 @@ namespace webapi.event_.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
 
         public IActionResult GetById(Guid id)
         {
@@ -69,6 +74,7 @@ namespace webapi.event_.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Put(Guid id, TiposEvento tipoEvento) 
         { 
         try
