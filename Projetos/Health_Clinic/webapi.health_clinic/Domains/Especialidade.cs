@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.health_clinic.Domains
 {
     [Table(nameof(Especialidade))]
+    [Index(nameof(Titulo), IsUnique =true)]
     public class Especialidade
     {
         [Key]
@@ -11,6 +13,6 @@ namespace webapi.health_clinic.Domains
 
         [Column(TypeName ="Varchar(50)")]
         [Required(ErrorMessage ="O Titulo de Especialidade é obrigatório!!!")]
-        public string Titulo { get; set; }
+        public string? Titulo { get; set; }
     }
 }

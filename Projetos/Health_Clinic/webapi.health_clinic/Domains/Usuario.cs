@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.health_clinic.Domains
 {
     [Table(nameof(Usuario))]
+    [Index(nameof(Email), IsUnique = true)]
     public class Usuario
     {
         [Key]
@@ -11,12 +13,19 @@ namespace webapi.health_clinic.Domains
 
         [Column(TypeName = "VARCHAR(256)")]
         [Required(ErrorMessage = "O Email é obrigatório")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
 
         [Column(TypeName =  "CHAR(60)")]
         [Required(ErrorMessage = "A senha  é obrigatória")]
         [StringLength(60, MinimumLength = 6, ErrorMessage = "A senha dve conter de 6 a 60 caracteres!!!")]
-        public string Senha { get; set; }
+        public string? Senha { get; set; }
+
+        public Guid IdTipoDeUsuario { get; set; }
+
+        [ForeignKey(nameof(IdTipoDeUsuario))]
+        public TiposDeUsuario? TipoDeUsuario { get; set; }
+
+
     }
 }
