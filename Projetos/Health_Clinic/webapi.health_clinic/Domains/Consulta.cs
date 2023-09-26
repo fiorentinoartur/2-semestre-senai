@@ -26,8 +26,7 @@ namespace webapi.health_clinic.Domains
         public Guid IdMedico{ get; set; }
 
         [ForeignKey(nameof(IdMedico))]
-        [InverseProperty("Medico")]
-        public virtual Medico? Medico { get; set; }
+        public Medico? Medico { get; set; }
 
         //ref.tabela IdPresencaConsulta = FK
         [Required(ErrorMessage = "Informe a Presenca da Consulta!")]

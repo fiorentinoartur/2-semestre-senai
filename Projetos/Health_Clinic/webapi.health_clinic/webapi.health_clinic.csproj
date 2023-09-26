@@ -25,10 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Utils\" />
-    <Folder Include="ViewModel\" />
   </ItemGroup>
 
 </Project>

@@ -175,7 +175,7 @@ namespace webapi.health_clinic.Migrations
                         column: x => x.IdMedico,
                         principalTable: "Medico",
                         principalColumn: "IdMedico",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Consulta_Paciente_IdPaciente",
                         column: x => x.IdPaciente,
@@ -193,7 +193,7 @@ namespace webapi.health_clinic.Migrations
                         column: x => x.IdProntuario,
                         principalTable: "Prontuario",
                         principalColumn: "IdProntuario",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
