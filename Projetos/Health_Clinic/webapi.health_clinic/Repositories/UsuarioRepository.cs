@@ -1,4 +1,5 @@
-﻿using webapi.health_clinic.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using webapi.health_clinic.Contexts;
 using webapi.health_clinic.Domains;
 using webapi.health_clinic.Interfaces;
 
@@ -43,14 +44,13 @@ namespace webapi.health_clinic.Repositories
 
         Usuario IUsuario.GetById(Guid id)
         {
-            Usuario usuarioBuscado = ctx.Usuario.Find(id);
-
+            Usuario usuarioBuscado = ctx.Usuario.Include(t => t.TipoDeUsuario).FirstOrDefault(idBanco => idBanco.IdUsuario == id);
             return usuarioBuscado;
         }
 
         List<Usuario> IUsuario.Listar()
         {
-            return ctx.Usuario.ToList();
+            return ctx.Usuario.Include(t => t.TipoDeUsuario).ToList();
         }
     }
 }

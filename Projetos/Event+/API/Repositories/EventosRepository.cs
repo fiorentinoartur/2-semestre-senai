@@ -55,7 +55,7 @@ namespace webapi.event_.Repositories
 
         public List<Evento> Listar()
         {
-    /*        List<Evento> eventos = ctx.Eventos
+         List<Evento> eventos = ctx.Eventos
     .Select(e => new Evento
     {
         IdEvento = e.IdEvento,
@@ -71,8 +71,8 @@ namespace webapi.event_.Repositories
             Titulo = e.TipoEvento.Titulo,
         }
     }).ToList();
-    */
-return ctx.Eventos.Include(i => i.Instituicao).Include(t => t.TipoEvento).ToList();
+            return eventos;
+//return ctx.Eventos.Include(i => i.Instituicao).Include(t => t.TipoEvento).ToList();
         }
     }
 }
