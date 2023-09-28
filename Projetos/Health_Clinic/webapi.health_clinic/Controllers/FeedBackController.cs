@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.health_clinic.Domains;
 using webapi.health_clinic.Interfaces;
@@ -10,23 +9,35 @@ namespace webapi.health_clinic.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
-    public class UsuarioController : ControllerBase
+    public class FeedBackController : ControllerBase
     {
-        private IUsuario _usuarioRepository { get; set; }
+        private IFeedBacks _feedBacksRepository { get; set; }
 
-        public UsuarioController()
+        public FeedBackController()
         {
-            _usuarioRepository = new UsuarioRepository();
+            _feedBacksRepository = new FeedBackRepository();
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public IActionResult Get()
         {
             try
             {
-                return Ok(_usuarioRepository.Listar());
+                return Ok(_feedBacksRepository.Listar());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
+        [HttpDelete]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                _feedBacksRepository.Deletar(id);
+                return Ok("O comentário foi excluído com sucesso!!");
             }
             catch (Exception e)
             {
@@ -34,27 +45,12 @@ namespace webapi.health_clinic.Controllers
             }
         }
         [HttpPost]
-        [Authorize(Roles = "Administrador")]
-        public IActionResult Post(Usuario usuario)
+        public IActionResult Post(FeedBacks feedBack)
         {
             try
             {
-                _usuarioRepository.Cadastrar(usuario);
-                return Ok("Usuario cadastrado com sucesso!");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-        [HttpDelete]
-        [Authorize(Roles = "Administrador")]
-        public IActionResult Delete(Guid id) 
-        {
-            try
-            {
-                _usuarioRepository.Deletar(id);
-                return Ok("Usuário excluído com sucesso!!!");
+                _feedBacksRepository.Cadastrar(feedBack);
+                return Ok("O comentário foi cadastrado com sucesso!!");
             }
             catch (Exception e)
             {
@@ -62,13 +58,12 @@ namespace webapi.health_clinic.Controllers
             }
         }
         [HttpPut]
-        [Authorize(Roles = "Administrador")]
-        public IActionResult Atualizar(Usuario usuario, Guid id) 
+        public IActionResult Put(Guid id, FeedBacks feedBack)
         {
             try
             {
-                _usuarioRepository.Atualizar(id, usuario);
-                return Ok("Usuário atualizado com sucesso!");
+                _feedBacksRepository.Atualizar(id, feedBack);
+                return Ok("O comentário foi atualizado com sucesso!!");
             }
             catch (Exception e)
             {
@@ -76,17 +71,20 @@ namespace webapi.health_clinic.Controllers
             }
         }
         [HttpGet("{id}")]
-        [Authorize(Roles = "Administrador")]
-        public IActionResult GetById(Guid id)
+        public IActionResult GetById(Guid id) 
         {
             try
             {
-                return Ok(_usuarioRepository.GetById(id));
+
+                return Ok(_feedBacksRepository.GetById(id));
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
+
     }
+
+
 }

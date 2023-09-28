@@ -70,6 +70,18 @@ namespace webapi.health_clinic.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try 
+            {
+                return Ok(_consultaRepository.GetById(id));
+            }
+            catch (Exception e) 
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
     }
 }

@@ -12,14 +12,6 @@ namespace webapi.health_clinic.Domains
         [Column(TypeName = "DATE")]
         [Required(ErrorMessage = "A Data é obrigatória!")]
         public DateTime Data { get; set; }
-       
-        
-        //ref.tabela IdProntuario = FK
-        [Required(ErrorMessage = "Informe o Prontuário!")]
-        public Guid IdProntuario{ get; set; }
-
-        [ForeignKey(nameof(IdProntuario))]
-        public Prontuario? Prontuario { get; set; }   
         
         //ref.tabela IdMedico = FK
         [Required(ErrorMessage = "Informe o Médico!")]
@@ -47,7 +39,9 @@ namespace webapi.health_clinic.Domains
         public Guid IdClinica { get; set; }
 
         [ForeignKey(nameof(IdClinica))]
-        public Clinica? Clinica { get; set; }  
+        public Clinica? Clinica { get; set; } 
+        
+
         
     }
 }

@@ -9,5 +9,6 @@ namespace webapi.health_clinic.Interfaces
         void Atualizar(Guid id, Usuario usuario);
         List<Usuario> Listar();
         Usuario GetById(Guid id);
+        Usuario BuscarPorEmailESenha(string email, string senha);
     }
 }

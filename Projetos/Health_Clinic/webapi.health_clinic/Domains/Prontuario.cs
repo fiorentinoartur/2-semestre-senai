@@ -19,6 +19,13 @@ namespace webapi.health_clinic.Domains
         public Guid IdUsuario { get; set; }
 
         [ForeignKey(nameof(IdUsuario))]
-        public Usuario? Usuario { get; set; }
+        public Usuario? Usuario { get; set; } 
+        
+        //ref.tabela Consulta = FK
+        [Required(ErrorMessage = "Informe a Consutla!!!")]
+        public Guid IdConsulta { get; set; }
+
+        [ForeignKey(nameof(IdConsulta))]
+        public Consulta? Consulta { get; set; }
     }
 }

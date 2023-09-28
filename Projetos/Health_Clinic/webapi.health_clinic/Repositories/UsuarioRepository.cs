@@ -2,6 +2,7 @@
 using webapi.health_clinic.Contexts;
 using webapi.health_clinic.Domains;
 using webapi.health_clinic.Interfaces;
+using webapi.health_clinic.Utils;
 
 namespace webapi.health_clinic.Repositories
 {
@@ -13,6 +14,33 @@ namespace webapi.health_clinic.Repositories
         {
             ctx = new HealthContext();
         }
+
+        public Usuario BuscarPorEmailESenha(string email, string senha)
+        {
+           Usuario usuarioBuscado = ctx.Usuario
+                .Select(u => new Usuario
+                {
+                    IdUsuario = u.IdUsuario,
+                    Email = u.Email,
+                    Senha = u.Senha,
+                    TipoDeUsuario = new TiposDeUsuario
+                    {
+                        Titulo = u.TipoDeUsuario.Titulo
+                    }
+                }).FirstOrDefault(u => u.Email == email);
+
+            if(usuarioBuscado != null)
+            {
+                bool confere = Criptografia.CompararHash(senha, usuarioBuscado.Senha);
+
+                if(confere)
+                {
+                    return usuarioBuscado;
+                }
+            }
+            return null;
+        }
+
         void IUsuario.Atualizar(Guid id, Usuario usuario)
         {
             Usuario usuarioBuscado = ctx.Usuario.Find(id);
@@ -28,7 +56,8 @@ namespace webapi.health_clinic.Repositories
 
         void IUsuario.Cadastrar(Usuario usuario)
         {
-            ctx.Usuario.Add(usuario);
+          usuario.Senha =  Criptografia.GerarHash(usuario.Senha);
+            ctx.Usuario.Add(usuario);   
 
             ctx.SaveChanges();
         }
