@@ -12,6 +12,8 @@ namespace webapi.health_clinic.Domains
         [Column(TypeName ="TEXT")]
         [Required(ErrorMessage = "A Descrição é obrigatória")]
         public string? Descricao { get; set; }
+
+        public FeedBacks _FeedBacks { get; set; }
         //ref.tabela IdConsulta = FK
         [Required(ErrorMessage = "Informe a Consulta!")]
         public Guid IdConsulta { get; set; }

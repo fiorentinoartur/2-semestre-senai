@@ -20,7 +20,6 @@ namespace webapi.health_clinic.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public IActionResult Get()
         {
             try
@@ -34,7 +33,7 @@ namespace webapi.health_clinic.Controllers
             }
         }
         [HttpPost]
-        [Authorize(Roles = "Administrador")]
+ 
         public IActionResult Post(Usuario usuario)
         {
             try
@@ -48,7 +47,6 @@ namespace webapi.health_clinic.Controllers
             }
         }
         [HttpDelete]
-        [Authorize(Roles = "Administrador")]
         public IActionResult Delete(Guid id) 
         {
             try
@@ -62,7 +60,6 @@ namespace webapi.health_clinic.Controllers
             }
         }
         [HttpPut]
-        [Authorize(Roles = "Administrador")]
         public IActionResult Atualizar(Usuario usuario, Guid id) 
         {
             try
@@ -76,7 +73,6 @@ namespace webapi.health_clinic.Controllers
             }
         }
         [HttpGet("{id}")]
-        [Authorize(Roles = "Administrador")]
         public IActionResult GetById(Guid id)
         {
             try

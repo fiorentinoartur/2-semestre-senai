@@ -14,6 +14,8 @@ namespace webapi.health_clinic.Domains
         [Key]
         public Guid IdClinica { get; set; } = Guid.NewGuid();
 
+        public ICollection<Medico> Medico { get; set; }
+
         [Column(TypeName ="VARCHAR(50)")]
         [Required(ErrorMessage = "O Nome Fantasia da clínica é Obrigatório")]
         public string? NomeFantasia { get; set; }
@@ -28,13 +30,18 @@ namespace webapi.health_clinic.Domains
         public string? Endereco { get; set; }
 
 
-        [Column(TypeName = "VARCHAR(200)")]
-        [Required(ErrorMessage = "O Funcionamento é obrigatório!!!")]
-        public string? Funcionamento { get; set; }
 
 
         [Column(TypeName = "VARCHAR(256)")]
         [Required(ErrorMessage = "A razão social é obrigatória!!!")]
         public string? RazaoSocial { get; set; }
+
+        [Column(TypeName = "TIME")]
+        [Required(ErrorMessage = "A Hora de abertura é obrigatória!!!")]
+        public TimeSpan? HoraDeAbertura { get; set; } 
+        
+        [Column(TypeName = "TIME")]
+        [Required(ErrorMessage = "A Hora de fechamento é obrigatória!!!")]
+        public TimeSpan? HoraDeFechamento { get; set; }
     }
 }

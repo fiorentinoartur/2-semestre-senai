@@ -12,8 +12,8 @@ using webapi.health_clinic.Contexts;
 namespace webapi.health_clinic.Migrations
 {
     [DbContext(typeof(HealthContext))]
-    [Migration("20230926011431_BD_v1")]
-    partial class BD_v1
+    [Migration("20231002133720_BD_V1")]
+    partial class BD_V1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,9 +40,13 @@ namespace webapi.health_clinic.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(256)");
 
-                    b.Property<string>("Funcionamento")
+                    b.Property<TimeSpan?>("HoraDeAbertura")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(200)");
+                        .HasColumnType("TIME");
+
+                    b.Property<TimeSpan?>("HoraDeFechamento")
+                        .IsRequired()
+                        .HasColumnType("TIME");
 
                     b.Property<string>("NomeFantasia")
                         .IsRequired()
@@ -90,9 +94,6 @@ namespace webapi.health_clinic.Migrations
                     b.Property<Guid>("IdPresencaConsulta")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IdProntuario")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("IdConsulta");
 
                     b.HasIndex("IdClinica");
@@ -102,8 +103,6 @@ namespace webapi.health_clinic.Migrations
                     b.HasIndex("IdPaciente");
 
                     b.HasIndex("IdPresencaConsulta");
-
-                    b.HasIndex("IdProntuario");
 
                     b.ToTable("Consulta");
                 });
@@ -139,9 +138,14 @@ namespace webapi.health_clinic.Migrations
                     b.Property<Guid>("IdConsulta")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("_FeedBacksIdFeedBacks")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("IdFeedBacks");
 
                     b.HasIndex("IdConsulta");
+
+                    b.HasIndex("_FeedBacksIdFeedBacks");
 
                     b.ToTable("FeedBacks");
                 });
@@ -248,10 +252,15 @@ namespace webapi.health_clinic.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(256)");
 
+                    b.Property<Guid>("IdConsulta")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("IdUsuario")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("IdProntuario");
+
+                    b.HasIndex("IdConsulta");
 
                     b.HasIndex("IdUsuario");
 
@@ -286,6 +295,9 @@ namespace webapi.health_clinic.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(256)");
 
+                    b.Property<Guid>("IdTipoDeUsuario")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasMaxLength(60)
@@ -295,6 +307,8 @@ namespace webapi.health_clinic.Migrations
 
                     b.HasIndex("Email")
                         .IsUnique();
+
+                    b.HasIndex("IdTipoDeUsuario");
 
                     b.ToTable("Usuario");
                 });
@@ -308,7 +322,7 @@ namespace webapi.health_clinic.Migrations
                         .IsRequired();
 
                     b.HasOne("webapi.health_clinic.Domains.Medico", "Medico")
-                        .WithMany()
+                        .WithMany("Consultas")
                         .HasForeignKey("IdMedico")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -325,12 +339,6 @@ namespace webapi.health_clinic.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("webapi.health_clinic.Domains.Prontuario", "Prontuario")
-                        .WithMany()
-                        .HasForeignKey("IdProntuario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Clinica");
 
                     b.Navigation("Medico");
@@ -338,25 +346,31 @@ namespace webapi.health_clinic.Migrations
                     b.Navigation("Paciente");
 
                     b.Navigation("PresencaConsulta");
-
-                    b.Navigation("Prontuario");
                 });
 
             modelBuilder.Entity("webapi.health_clinic.Domains.FeedBacks", b =>
                 {
                     b.HasOne("webapi.health_clinic.Domains.Consulta", "Consulta")
-                        .WithMany()
+                        .WithMany("FeedBacks")
                         .HasForeignKey("IdConsulta")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("webapi.health_clinic.Domains.FeedBacks", "_FeedBacks")
+                        .WithMany()
+                        .HasForeignKey("_FeedBacksIdFeedBacks")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Consulta");
+
+                    b.Navigation("_FeedBacks");
                 });
 
             modelBuilder.Entity("webapi.health_clinic.Domains.Medico", b =>
                 {
                     b.HasOne("webapi.health_clinic.Domains.Clinica", "Clinica")
-                        .WithMany()
+                        .WithMany("Medico")
                         .HasForeignKey("IdClinica")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -393,13 +407,47 @@ namespace webapi.health_clinic.Migrations
 
             modelBuilder.Entity("webapi.health_clinic.Domains.Prontuario", b =>
                 {
+                    b.HasOne("webapi.health_clinic.Domains.Consulta", "Consulta")
+                        .WithMany()
+                        .HasForeignKey("IdConsulta")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("webapi.health_clinic.Domains.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Consulta");
+
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("webapi.health_clinic.Domains.Usuario", b =>
+                {
+                    b.HasOne("webapi.health_clinic.Domains.TiposDeUsuario", "TipoDeUsuario")
+                        .WithMany()
+                        .HasForeignKey("IdTipoDeUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TipoDeUsuario");
+                });
+
+            modelBuilder.Entity("webapi.health_clinic.Domains.Clinica", b =>
+                {
+                    b.Navigation("Medico");
+                });
+
+            modelBuilder.Entity("webapi.health_clinic.Domains.Consulta", b =>
+                {
+                    b.Navigation("FeedBacks");
+                });
+
+            modelBuilder.Entity("webapi.health_clinic.Domains.Medico", b =>
+                {
+                    b.Navigation("Consultas");
                 });
 #pragma warning restore 612, 618
         }

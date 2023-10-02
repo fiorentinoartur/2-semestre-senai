@@ -31,5 +31,18 @@ namespace webapi.health_clinic.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [HttpDelete]
+        public IActionResult Delete(Guid id) 
+        {
+            try
+            {
+                _clinicaRepository.Deletar(id);
+                return Ok("Clínica excluída com sucesso!!!");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

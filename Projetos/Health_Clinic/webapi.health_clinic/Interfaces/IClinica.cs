@@ -4,6 +4,7 @@ namespace webapi.health_clinic.Interfaces
 {
     public interface IClinica
     {
-        void Cadastrar(Clinica clinica);    
+        void Cadastrar(Clinica clinica);
+        void Deletar(Guid id);
     }
 }
