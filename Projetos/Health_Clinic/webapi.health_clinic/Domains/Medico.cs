@@ -21,7 +21,7 @@ namespace webapi.health_clinic.Domains
         [Required(ErrorMessage = "O Nome é Obrigatório")]
         public string? Nome { get; set; }
 
-        public ICollection<Consulta> Consultas { get; set; }
+
 
         //ref.tabela IdEspecialidade = FK
         [Required(ErrorMessage = "Informe a especialidade!")]

@@ -14,7 +14,6 @@ namespace webapi.health_clinic.Domains
         [Key]
         public Guid IdClinica { get; set; } = Guid.NewGuid();
 
-        public ICollection<Medico> Medico { get; set; }
 
         [Column(TypeName ="VARCHAR(50)")]
         [Required(ErrorMessage = "O Nome Fantasia da clínica é Obrigatório")]

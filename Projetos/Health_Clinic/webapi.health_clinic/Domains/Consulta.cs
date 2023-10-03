@@ -17,7 +17,7 @@ namespace webapi.health_clinic.Domains
         [Required(ErrorMessage = "Informe o Médico!")]
         public Guid IdMedico{ get; set; }
 
-        public ICollection<FeedBacks> FeedBacks { get; set; }
+     
         [ForeignKey(nameof(IdMedico))]
         public Medico? Medico { get; set; }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapi.health_clinic.Contexts;
 
@@ -11,9 +12,11 @@ using webapi.health_clinic.Contexts;
 namespace webapi.health_clinic.Migrations
 {
     [DbContext(typeof(HealthContext))]
-    partial class HealthContextModelSnapshot : ModelSnapshot
+    [Migration("20231003193336_GatilhoProntuario")]
+    partial class GatilhoProntuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -319,7 +322,7 @@ namespace webapi.health_clinic.Migrations
                         .IsRequired();
 
                     b.HasOne("webapi.health_clinic.Domains.Medico", "Medico")
-                        .WithMany()
+                        .WithMany("Consultas")
                         .HasForeignKey("IdMedico")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -348,7 +351,7 @@ namespace webapi.health_clinic.Migrations
             modelBuilder.Entity("webapi.health_clinic.Domains.FeedBacks", b =>
                 {
                     b.HasOne("webapi.health_clinic.Domains.Consulta", "Consulta")
-                        .WithMany()
+                        .WithMany("FeedBacks")
                         .HasForeignKey("IdConsulta")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -367,7 +370,7 @@ namespace webapi.health_clinic.Migrations
             modelBuilder.Entity("webapi.health_clinic.Domains.Medico", b =>
                 {
                     b.HasOne("webapi.health_clinic.Domains.Clinica", "Clinica")
-                        .WithMany()
+                        .WithMany("Medico")
                         .HasForeignKey("IdClinica")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -430,6 +433,21 @@ namespace webapi.health_clinic.Migrations
                         .IsRequired();
 
                     b.Navigation("TipoDeUsuario");
+                });
+
+            modelBuilder.Entity("webapi.health_clinic.Domains.Clinica", b =>
+                {
+                    b.Navigation("Medico");
+                });
+
+            modelBuilder.Entity("webapi.health_clinic.Domains.Consulta", b =>
+                {
+                    b.Navigation("FeedBacks");
+                });
+
+            modelBuilder.Entity("webapi.health_clinic.Domains.Medico", b =>
+                {
+                    b.Navigation("Consultas");
                 });
 #pragma warning restore 612, 618
         }
