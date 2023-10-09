@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução</title>
+</head>
+<!-- c<body onload="alert('Página carregada com sucesso!!!')"> -->
+    <h1>Introdução ao JavaScript</h1>
+    <input type="text" placeholder="Digite seu nome: " id="nome">
+    <button onclick="saudacao()">Bom dia</button>
+
+    <script>    
+    function saudacao() {
+      let nome = document.getElementById('nome').value
+    //   alert(`${nome.value}`)
+    alert(`Bom dia ${nome}!`)
+    }
+    </script>
+</body>
+</html>
