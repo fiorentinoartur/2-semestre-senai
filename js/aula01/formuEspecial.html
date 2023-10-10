@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senai</title>
+</head>
+
+<body>
+    <form action="" ">
+        <fieldset>
+            <legend>Alterar Dados</legend>
+
+            <label for="nomeAtual">Digite o nome atual:</label>
+            <input type="text" id="nomeAtual">
+            <br> <br>
+            <label for="nomeDesejado">Digite o nome desejado:</label>
+            <input type="text" id="nomeDesejado">
+            <br> <br>
+            <p id="result"> </strong></p>
+
+            <button onclick="nomeReplace()">aa </button>
+        </fieldset>
+    </form>
+
+    <script>
+        function nomeReplace() {
+            event.preventDefault()
+
+            let nome = document.getElementById('nomeDesejado').value
+            let nick = document.getElementById('nomeAtual').value
+            
+            document.getElementById('result').innerText =`Nome alterado com sucesso, muito obrigado  ${nome.replace(nick)}` 
+        }
+    </script>
+</body>
+
+</html>

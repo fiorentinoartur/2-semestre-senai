@@ -5,59 +5,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        body h1 {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .calc {
+            margin-left: calc(50% - 250px);
+            margin-top: 200px;
+            width: 500px;
+            height: 300px;
+        }
+
+        .calc fieldset {
+            padding: 5px;
+        }
+    </style>
 </head>
 
 <body>
+
+
     <h1>Simple Calc</h1>
+    <div class="calc">
 
-    <form action="" onsubmit="Operacao()">
-        <label for="n1">Primeiro Número</label>
-        <input type="number" id="n1">
+        <form action="" onsubmit="Operacao()">
+            <fieldset>
+                <legend>Calculadora</legend>
+                <label for="n1">Primeiro Número</label>
+                <input type="number" id="n1">
+                <br> <br>
+                <label for="n2">Segundo Número</label>
+                <input type="number" id="n2">
+                <p> <strong id="result"></strong></p>
+                <br> <br>
+                <label for="n2">Selecione a Operacao</label>
+                <select name="" id="operacao">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="+">Soma</option>
+                    <option value="-">Subtração</option>
+                    <option value="*">Multiplicação</option>
+                    <option value="/">Divisão</option>
+                </select>
+                <br><br>
+                <button>Calcular</button>
+            </fieldset>
+        </form>
+    </div>
 
-        <label for="n2">Segundo Número</label>
-        <input type="number" id="n2">
+    <script src="./calculadora.js">
 
-        <label for="n2">Digite a Operacao</label>
-        <select name="" id="operacao">
-            <option value=""  disabled selected>Selecione</option>
-            <option value="+">Soma</option>
-            <option value="-">Subtração</option>
-            <option value="*">Multiplicação</option>
-            <option value="/">Divisão</option>
-        </select>
-        <br><br>
-        <button>Calcular</button>
-    </form>
-
-    <script>
-
-        function Operacao(numberA, numberB, operacao) {
-            event.preventDefault(); //Capturarar o evento do formulário
-
-            let n1 = Number(document.getElementById('n1').value)
-            let n2 = Number(document.getElementById('n2').value)
-            let op = document.getElementById('operacao').value
-            switch (operacao) {
-                case '+':
-                    return ` O resultado da soma = ${numberA + numberB}`
-                    break;
-                case '-':
-                    return ` O resultado da subtração = ${numberA - numberB}`
-                    break;
-                case '*':
-                    return ` O resultado da multiplicação = ${numberA + numberB}`
-                    break;
-                case '/':
-                    return ` O resultadado da divisão = ${numberA + numberB}`
-                    break;
-
-                default:
-
-                    break;
-            }
-            let resultado = Operacao(n1, n2, op)
-            alert(` ${resultado}`)
-        }
     </script>
 </body>
 
