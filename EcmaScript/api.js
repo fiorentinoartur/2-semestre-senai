@@ -8,10 +8,7 @@ fetch(url)
 })
 .then((dados) => {
 console.log(
-    `Endereço:     ${dados.logradouro}
-     Cidade:       ${dados.localidade}
-     Estado:       ${dados.uf}
-    `
+dados
     );
 })
 .catch()
