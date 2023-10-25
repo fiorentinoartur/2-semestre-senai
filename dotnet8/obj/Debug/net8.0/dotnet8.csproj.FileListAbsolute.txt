@@ -1,0 +1,15 @@
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\bin\Debug\net8.0\dotnet8.exe
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\bin\Debug\net8.0\dotnet8.deps.json
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\bin\Debug\net8.0\dotnet8.runtimeconfig.json
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\bin\Debug\net8.0\dotnet8.dll
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\bin\Debug\net8.0\dotnet8.pdb
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\obj\Debug\net8.0\dotnet8.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\obj\Debug\net8.0\dotnet8.AssemblyInfoInputs.cache
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\obj\Debug\net8.0\dotnet8.AssemblyInfo.cs
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\obj\Debug\net8.0\dotnet8.csproj.CoreCompileInputs.cache
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\obj\Debug\net8.0\dotnet8.sourcelink.json
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\obj\Debug\net8.0\dotnet8.dll
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\obj\Debug\net8.0\refint\dotnet8.dll
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\obj\Debug\net8.0\dotnet8.pdb
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\obj\Debug\net8.0\dotnet8.genruntimeconfig.cache
+C:\Users\49957976885\Desktop\2-semestre-senai\dotnet8\obj\Debug\net8.0\ref\dotnet8.dll
