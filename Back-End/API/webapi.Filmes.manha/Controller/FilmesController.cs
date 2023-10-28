@@ -26,6 +26,10 @@ namespace webapi.Filmes.manha.Controller
             _filmeRepository = new FilmeRepository();
         }
 
+        /// <summary>
+        /// fgsgfsgsdgf
+        /// </summary>
+        /// <returns>fgdgsdgssdff</returns>
         [HttpGet]
 
         public IActionResult Get()
