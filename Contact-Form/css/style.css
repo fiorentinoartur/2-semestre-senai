@@ -250,9 +250,35 @@ align-items: center;
     text-align: center;
    color: white;
    font-size: 12px;
-
+position: absolute;
+bottom: 0;
 }
 
+/* TABLETS */
+@media screen and (max-width:991px) 
+{
+    form{
+        width: 717px;
+    }
+    .form-enderecos{
+        width:350px ;
+        margin:0 30px;
+    }
+    .form-enderecos input
+    {
+        width: 150px;
+    }
+#rua
+{
+    width: 110px;
+}
+
+    #numero-rua
+    {
+        width: 40px;
+    }
+    
+}
  @media screen and (max-width: 767px)
 {
     body{
@@ -391,4 +417,15 @@ font-size: 10px;
         color: rgb(199, 196, 196);
     }
     
+}
+#cep::-webkit-inner-spin-button,
+#cep::-webkit-outer-spin-button,
+#numero-rua::-webkit-inner-spin-button,
+#numero-rua::-webkit-outer-spin-button,
+#ddd::-webkit-inner-spin-button,
+#ddd::-webkit-outer-spin-button,
+#numero::-webkit-outer-spin-button,
+#numero::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

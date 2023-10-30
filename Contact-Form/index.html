@@ -22,11 +22,11 @@
         <div class="card1">
             <h1>Informações de Contato </h1>
             <input type="text" placeholder="Digite seu Nome:" id="nome" required >
-            <input type="text" placeholder="Digite seu Email:" id="email" aria-required="true">
+            <input type="email" placeholder="Digite seu Email:" id="email" required>
             <p>Telefone:</p>
             <div class="telefone">
-                <input type="text" required placeholder="DDD" id="ddd">
-                <input type="text" required placeholder="Número" id="numero">
+                <input type="number" placeholder="DDD" id="ddd" required>
+                <input type="number" placeholder="Número" id="numero" required >
             </div>
             <div class="circle"></div>
         </div>
@@ -35,11 +35,11 @@
 
                     <div class="part1 d-flex-column">
                         <label for="cep">CEP</label>
-                        <input onblur="buscarEndereco(this.value)" required type="text" placeholder="Ex: 09456-020" id="cep">
+                        <input onblur="buscarEndereco(this.value)" type="number" placeholder="Ex: 09456-020" id="cep" required>
                         <label for="complemento">Complemento</label>
-                        <input type="text" required placeholder="Ex: Ap.12 Bloco X" id="complemento">
+                        <input type="text"  placeholder="Ex: Ap.12 Bloco X" id="complemento" required>
                         <label for="cidade">Cidade</label>
-                        <input type="text" required placeholder="Ex: Santo Paulo" id="cidade">
+                        <input type="text"  placeholder="Ex: Santo Paulo" id="cidade" required>
                     </div>
                     <div class="part2 d-flex-column">
                         <div class="rua d-flex">
@@ -51,13 +51,13 @@
                             <div class="d-flex-column">
     
                                 <label for="cep">Nº</label>
-                                <input type="text" required placeholder="Ex: 345" id="numero-rua">
+                                <input type="number"  placeholder="Ex: 345" id="numero-rua" required>
                             </div>
                         </div>
                         <label for="bairro">Bairro</label>
-                        <input type="text" required placeholder="Ex: Jd da Saudade" id="bairro">
+                        <input type="text" placeholder="Ex: Jd da Saudade" id="bairro" required >
                         <label for="estado">Estado</label>
-                        <input type="text" required placeholder="Ex: Maranhão" id="estado">
+                        <input type="text"  placeholder="Ex: Maranhão" id="estado" required>
                     </div>
                 </div>
                 <label for="">Mensagem</label>

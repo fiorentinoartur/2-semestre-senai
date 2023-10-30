@@ -1,0 +1,34 @@
+{
+  "contatos": [
+    {
+      "nome": "Artur Fiorentino",
+      "email": "afiorentino1415@gmail.com",
+      "ddd": "11",
+      "CEP": "09182020",
+      "complemento": "Casa",
+      "rua": "Rua Paulo Lacorte",
+      "numeroRua": "256",
+      "bairro": "Jardim Las Vegas",
+      "numero": "913622129",
+      "cidade": "Santo André",
+      "estado": "SP",
+      "texto": "Hi, my name is Artur Fiorentino",
+      "id": 1
+    },
+    {
+      "nome": "Patricia",
+      "email": "patricia@gmail.com",
+      "ddd": "11",
+      "CEP": "09380420",
+      "complemento": "Apartamento",
+      "rua": "Rua Kallil Filho",
+      "numeroRua": "345",
+      "bairro": "Jardim Sílvia Maria",
+      "numero": "992891001",
+      "cidade": "Mauá",
+      "estado": "SP",
+      "texto": "Prazerrrfdsafasfafdagasggfasdgasgasg",
+      "id": 2
+    }
+  ]
+}
