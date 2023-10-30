@@ -33,38 +33,41 @@ async function cadastrar(e)
         cidade,
         estado,
         texto    
-    }
-    validarCadastro(objCadastro);
+    }     
 
-    if (validarCadastro(objCadastro)) {
-        try{
-            const promise = await fetch(urlApiLocal, {
-                body: JSON.stringify(objCadastro),
-                method: "post",
-                headers: {"Content-type": "application/json"}
-            })
-                alert("Cadastrado realizado com sucesso")  
+    let validacao =    validarCadastro(objCadastro);
+    console.log(validacao)
+        if (validacao == true) {
+            try{
+                const promise = await fetch(urlApiLocal, {
+                    body: JSON.stringify(objCadastro),
+                    method: "post",
+                    headers: {"Content-type": "application/json"}
+                })
+               alert("Cadastro realizado com sucesso!!!")
+            }
+            catch(e)
+            {
+                console.log(e.Message);
+                console.log("Deu erro")
+            }
         }
-        catch(e)
+        else
         {
-            console.log(e.Message);
+            alert("Algum dado inválido")
         }
     }
-    else
-    {
-        alert("Algum dado inválido")
-    }
 
-}
 function validarCadastro(objCadastro)
 {
  const { nome, email, ddd, CEP, complemento, rua, numeroRua, bairro, numero, cidade, estado, texto } = objCadastro;
 
- if (nome.length < 3 || email.length < 3 || ddd > 99 || ddd < 0 || CEP < 8 || CEP > 8 || complemento.length < 3 || rua.length < 3 || numeroRua < 0 || bairro.length < 3 || numero < 9 || numero[0] != 9 || cidade.length < 3|| estado.length < 2 || texto.length < 3 ) {
-   
+ if (nome.length < 3 || email.length < 3 || ddd > 99 || ddd < 0 || CEP.length != 8  || complemento.length < 3 || rua.length < 3 || numeroRua < 0 || bairro.length < 3 || numero < 9  || cidade.length < 3|| estado.length < 2 || texto.length < 3 ) {
+
     return false;
  }
  else{
+    console.log("Deu certo")
     return true;
  }
 }
