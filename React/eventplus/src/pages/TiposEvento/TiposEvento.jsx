@@ -1,13 +1,13 @@
 import React from 'react';
 import Titulo from '../../Components/Titulo/Titulo';
 import Header from '../../Components/Header/Header';
-const Login = () => {
+const TiposEvento = () => {
     return (
         <div>
-            <Header />
-            <Titulo nome="Página Login" />
+            <Header/>
+            <Titulo nome="Página Tipos Eventos"/>
         </div>
     );
 };
 
-export default Login;
+export default TiposEvento;

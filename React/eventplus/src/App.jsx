@@ -1,12 +1,7 @@
 
 import './App.css';
+import Rotas from './routes';
+const App = () => <Rotas />
 
-function App() {
-  return (
-    <div className="App">
-   
-    </div>
-  );
-}
 
 export default App;
