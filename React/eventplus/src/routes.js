@@ -8,23 +8,23 @@ import Eventos from './pages/Eventos/Eventos';
 import TiposEvento from './pages/TiposEvento/TiposEvento';
 import Teste from './pages/Teste/Teste';
 import Header from './Components/Header/Header';
-import Footer from './pages/Footer/Footer';
-const Rotas = () => {
-    return (
-        <div>
-            <BrowserRouter>
+import Nav from './Components/Nav/Nav';
+import Footer from './Components/Footer/Footer';
+const Rotas = () => (
+    <div>
+        <BrowserRouter>
             <Header />
-                <Routes>
-                    <Route element={<Home/>} path="/" exact></Route>
-                    <Route element={<Login/>} path="/login"></Route>
-                    <Route element={<TiposEvento/>} path="/tipos-evento"></Route>
-                    <Route element={<Eventos/>} path="/eventos"></Route>
-                    <Route element={<Teste/>} path="/teste"></Route>
-                </Routes>
-                <Footer/>
-            </BrowserRouter>
-        </div>
-    );
-};
+
+            <Routes>
+                <Route element={<Home />} path="/" exact></Route>
+                <Route element={<TiposEvento />} path="/tipos-evento"></Route>
+                <Route element={<Eventos />} path="/eventos"></Route>
+                <Route element={<Login />} path="/login"></Route>
+                <Route element={<Teste />} path="/teste"></Route>
+            </Routes>
+            <Footer />
+        </BrowserRouter>
+    </div>
+);
 
 export default Rotas;
