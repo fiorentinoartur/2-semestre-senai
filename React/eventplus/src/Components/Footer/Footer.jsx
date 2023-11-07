@@ -1,10 +1,9 @@
 import React from 'react';
 import "./Footer.css"
-const Footer = () => {
+const Footer = ({textRigths="Artuzzette Lindoooooooooo"}) => {
     return (
-        <footer className='footer'>
-
-            <p className='footer__rights'>Todos os direitos reservado</p>
+        <footer className='footer-page'>
+           <p className='footer-page-rights'>{textRigths}</p>
         </footer>
         
     );

@@ -7,13 +7,12 @@ const Nav = ({exibeNavbar, setExibeNavbar}) => {
     console.log(`Exibe o Menu?${exibeNavbar}`)
     return (
         <nav className={`navbar ${exibeNavbar ? "exibeNavbar" : ""}`}>
-            <span className='navbar__close'>x</span>
+            <span onClick={() => {setExibeNavbar(false)}} className='navbar__close '>x</span>
             <Link to="/" className='eventlogo'>
                 <img
                 className='eventlogo__logo-image' 
                 src={window.innerWidth >= 992 ? logoDesktop : logoMobile}
                 alt="Event Plus Logo"
-            
                 />
             
             </Link>

@@ -1,10 +1,13 @@
 import React from 'react';
-import Titulo from '../../Components/Titulo/Titulo';
+import Banner from '../../Components/Banner/Banner';
+import Main from '../../Components/Main/Main'
+import VisionSection from '../../Components/VisionSection/VisionSection';
 const Home = () => {
     return (
-        <div>
-            <Titulo nome="Página Home"/>
-        </div>
+            <Main>
+            <Banner />
+                <VisionSection />
+            </Main>
     );
 };
 

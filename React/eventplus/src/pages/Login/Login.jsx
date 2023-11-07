@@ -3,7 +3,7 @@ import Titulo from '../../Components/Titulo/Titulo';
 const Login = () => {
     return (
         <div>
-            <Titulo nome="Página Login" />
+            <Titulo titleText={"Página de Login"} />
         </div>
     );
 };

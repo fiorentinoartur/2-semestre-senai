@@ -11,10 +11,8 @@ import Header from './Components/Header/Header';
 import Nav from './Components/Nav/Nav';
 import Footer from './Components/Footer/Footer';
 const Rotas = () => (
-    <div>
         <BrowserRouter>
             <Header />
-
             <Routes>
                 <Route element={<Home />} path="/" exact></Route>
                 <Route element={<TiposEvento />} path="/tipos-evento"></Route>
@@ -24,7 +22,6 @@ const Rotas = () => (
             </Routes>
             <Footer />
         </BrowserRouter>
-    </div>
 );
 
 export default Rotas;
