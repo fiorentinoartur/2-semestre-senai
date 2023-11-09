@@ -1,8 +1,8 @@
 import React from 'react';
 import "./NextEvent.css"
-const NextEvent = ({title,description, eventDate, idEvent}) => {
-    function conectar(idEvent) {
-        alert(`Chamar o recurso para conectar: ${idEvent}`)
+const NextEvent = ({title,description, eventDate, idEvento}) => {
+    function conectar(idEvento) {
+        alert(`Chamar o recurso para conectar: ${idEvento}`)
     }
     return (
     <article className="event-card">
@@ -10,7 +10,7 @@ const NextEvent = ({title,description, eventDate, idEvent}) => {
         <p className='event-card__description'>{description}</p>
         <p className='event-card__description'>{eventDate}</p>
 
-        <a onClick={()=> {conectar(idEvent)}} className='event-card__connect-link'>Conectar</a>
+        <a onClick={()=> {conectar(idEvento)}} className='event-card__connect-link'>Conectar</a>
     </article>
     );
 };

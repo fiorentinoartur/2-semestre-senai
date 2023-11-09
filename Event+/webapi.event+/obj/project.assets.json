@@ -11871,11 +11871,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\49957976885\\Desktop\\Event+\\webapi.event+\\webapi.event+.csproj",
+      "projectUniqueName": "C:\\Users\\49957976885\\Desktop\\2-semestre-senai\\Event+\\webapi.event+\\webapi.event+.csproj",
       "projectName": "webapi.event+",
-      "projectPath": "C:\\Users\\49957976885\\Desktop\\Event+\\webapi.event+\\webapi.event+.csproj",
+      "projectPath": "C:\\Users\\49957976885\\Desktop\\2-semestre-senai\\Event+\\webapi.event+\\webapi.event+.csproj",
       "packagesPath": "C:\\Users\\49957976885\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\49957976885\\Desktop\\Event+\\webapi.event+\\obj\\",
+      "outputPath": "C:\\Users\\49957976885\\Desktop\\2-semestre-senai\\Event+\\webapi.event+\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\49957976885\\AppData\\Roaming\\NuGet\\NuGet.Config",

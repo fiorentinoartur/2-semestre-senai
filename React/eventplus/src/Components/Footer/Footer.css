@@ -6,8 +6,9 @@
 .footer-page {
     font-family: Poppins-Regular;
     font-size: 0.875rem;
-    padding: 10px;
+    padding: 8px;
     background-color: var(--color-white);
+    border-top: 1px solid gray;
 }
 
 .footer-page-rights {
