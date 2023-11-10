@@ -8,15 +8,16 @@ import Titulo from '../../Components/Titulo/Titulo';
 import NextEvent from '../../Components/NextEvent/NextEvent'
 import Container from '../../Components/Container/Container'
 import axios from 'axios';
+import api from '../../Services/Service'
+import { nextEventsResource } from '../../Services/Service';
 const Home = () => {
     //dados mocados 
     const [nextEvents, setNextEvents] = useState([]);
-    const urlLocal = 'https://localhost:7118/api/'
    // roda somente na inicialização do componente
     useEffect(() => {
         async function getNextEvents() {
             try {
-                const promise = axios.get(`${urlLocal}Evento/ListarProximos`);
+                const promise = api.get(nextEventsResource);
                 const dados = (await promise).data;
                 setNextEvents(dados); //atualiza o state
             }
