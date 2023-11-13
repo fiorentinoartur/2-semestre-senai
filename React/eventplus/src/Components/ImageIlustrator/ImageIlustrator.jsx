@@ -1,22 +1,25 @@
 import React from 'react';
-import typeEventImage from '../../assets/icons/tipo-evento.svg '
-const ImageIlustrator = ({altText, imageName, additionalClass}) => {
-    switch (imageName) {
-        case 'tipo-evento':
-            imageResource = typeEventImage
-            break;
+import typeEventImage from '../../assets/icons/tipo-evento.svg'
+import eventoImage  from '../../assets/icons/evento.svg'
+import dafaultImage from '../../assets/images/default-image.jpeg'
+const ImageIlustrator = ({altText, imageName, additionalClass, imageRender = dafaultImage}) => {
+    // switch (imageName) {
+    //     case 'tipo-evento':
+    //         imageResource = typeEventImage
+    //         break;
     
-        case 'evento':
-            imageResource = eventoImage
-            break;
+    //     case 'evento':
+    //         imageResource = eventoImage
+    //         break;
     
-        default:
-            break;
-    }
+    //     default:
+    //         imageResource = dafaultImage
+    //         break;
+    // }
     return (
     <figure className='ilustrador-brox'>
         <img 
-        src={imageResource} 
+        src={imageRender} 
         alt={altText}
         className={`ilustrator-box__image ${additionalClass}`} />
     </figure>

@@ -9,15 +9,19 @@ const NextEvent = ({title,description, eventDate, idEvento}) => {
     }
     return (
     <article className="event-card">
-        <h2 className="event-card__title">{title}</h2>
-        <p className=' event-card__description'
-         data-tooltip-id={idEvento}
-         data-tooltip-content={description}
-         data-tooltip-place="top">
-        <Tooltip id={idEvento}  className='tooltip' />  
-        {description.substr(0, 14)}...</p>
-        <p className='event-card__description'>{dateFormatDbToView(eventDate)}</p>
-        <a onClick={()=> {conectar(idEvento)}} className='event-card__connect-link'>Conectar</a>
+<swiper-container class="mySwiper" effect="cards" grab-cursor="true">
+    <swiper-slide>Slide 1</swiper-slide>
+    <swiper-slide>Slide 2</swiper-slide>
+    <swiper-slide>Slide 3</swiper-slide>
+    <swiper-slide>Slide 4</swiper-slide>
+    <swiper-slide>Slide 5</swiper-slide>
+    <swiper-slide>Slide 6</swiper-slide>
+    <swiper-slide>Slide 7</swiper-slide>
+    <swiper-slide>Slide 8</swiper-slide>
+    <swiper-slide>Slide 9</swiper-slide>
+  </swiper-container>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 
 
     </article>
