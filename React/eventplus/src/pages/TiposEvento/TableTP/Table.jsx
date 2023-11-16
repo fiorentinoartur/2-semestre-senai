@@ -21,7 +21,7 @@
       
       <tr className="table-data__head-row">
         <td className="table-data__data table-data__data--big">
-          Texto do tipo
+          {tp.titulo}
         </td>
 
         <td className="table-data__data table-data__data--little">
@@ -29,7 +29,16 @@
         </td>
 
         <td className="table-data__data table-data__data--little">
-          <img className="table-data__icon" src={trashDelete} alt="" />
+          <img 
+          idtipoevento={tp.idTipoEvento}
+          className="table-data__icon" 
+          src={trashDelete} 
+          alt="" 
+          onClick={(e) => {
+            fnDelete(e.target.getAttribute('idtipoevento'))
+          }}
+          
+          />
         </td>
       </tr>
   );

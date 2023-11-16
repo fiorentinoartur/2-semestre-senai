@@ -15,6 +15,7 @@ const TiposEvento = () => {
   const [titulo, setTitulo] = useState("")
   const [tiposEvento, setTiposEvento ] = useState([]);
   
+  //Função que após a página/DOM
   useEffect(() => {
     //define a chamada na api
    async function loadEventsType() {
@@ -27,7 +28,9 @@ const TiposEvento = () => {
     }
     }
     loadEventsType()
-  }, []);
+  }, [tiposEvento]);
+
+  
  async function handleSubmit(e) {
     e.preventDefault();
   
@@ -45,24 +48,47 @@ const TiposEvento = () => {
     }
    
   }
+
+
+
+// function atualizaEventosTela(idEvent)
+// {
+//   const xpto = tiposEvento.filter((t) => {
+//     return t.idEvent !== idEvent 
+//   });
+//   setTiposEvento(xpto)
+// }
+
+//cadastrar a atualização
   function handleUpdate(params) {
     alert('Bora Editar')
   }
 
-  //cancela a tela/ação de edição (volta pra o form de Cadastro)
-  function editActionAbort() {
-    alert("Cancelar a tela de edição de Dados")
-  }
   
-
   //mostra o form de edição
   function showUpdateForm()
   {
     alert("Vamos mostrar o forma de edição")
   }
+  //cancela a tela/ação de edição (volta pra o form de Cadastro)
+  function editActionAbort() {
+    alert("Cancelar a tela de edição de Dados")
+  }
+  
   //apaga o tipo de evento na api
-  function handleDelete(idEelement) {
-    alert(`Vamos apagar o evento de id: ${idEelement}`)
+  async function handleDelete(idEelement) {    
+   if (!window.confirm("Confirma a exclusão")) {
+    return;
+   }
+    try {
+      const promise = await api.delete(eventsTypeResource+'/'+idEelement)
+     if (promise.status == 204) {
+      setTiposEvento([]) //Atualiza a variável e roda o useStatete novamente
+     }
+    } catch (error) {
+      alert('Cadastrado com sucesso')
+    }
+   alert('Deletado com suceeso')
   }
   return (
     <>
