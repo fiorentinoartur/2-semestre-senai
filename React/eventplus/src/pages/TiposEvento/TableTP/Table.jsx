@@ -19,13 +19,22 @@
     {dados.map((tp) => {
   return (
       
-      <tr className="table-data__head-row">
+      <tr className="table-data__head-row" key={tp.idTipoEvento}>
         <td className="table-data__data table-data__data--big">
           {tp.titulo}
         </td>
 
         <td className="table-data__data table-data__data--little">
-          <img className="table-data__icon" src={editPen} alt="" />
+          <img 
+
+          className="table-data__icon" 
+          src={editPen} 
+          alt="" 
+          onClick={(e) => {
+            //fnUpdate(e.target.getAttribute('idtipoevento'))
+            fnUpdate(tp.idTipoEvento)
+          }}
+          />
         </td>
 
         <td className="table-data__data table-data__data--little">
