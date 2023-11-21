@@ -11,15 +11,21 @@ import api, {eventsTypeResource} from '../../Services/Service'
 import Notification from '../../Components/Notification/Notification';
 import eventImage  from '../../assets/icons/evento.svg'
 import dafaultImage from '../../assets/images/default-image.jpeg'
+import Spinner from '../../Components/Spinner/Spinner'
+
+
 const TiposEvento = () => {
   const [frmEdit, setNextEvents] = useState(false); //está em modo de edição
   const [titulo, setTitulo] = useState("")
+  const [idEvento, setidEvento] = useState(null); //para editar, por causa do evento
   const [tiposEvento, setTiposEvento ] = useState([]);
   const[notifyUser, setNotifyUser] = useState();
+  const [showSpinner, setShowSpinner] = useState(false)
   //Função que após a página/DOM
   useEffect(() => {
     //define a chamada na api
    async function loadEventsType() {
+    setShowSpinner(true)
     try {
       const promise = await api.get(eventsTypeResource);
       setTiposEvento(promise.data)
@@ -27,33 +33,59 @@ const TiposEvento = () => {
     } catch (error) {
       console.log("Erro na api", error);
     }
+    setShowSpinner(false)
     }
     loadEventsType()
   }, []);
 
   
-
+//*************************************CADASTRAR***********************************/
  async function handleSubmit(e) {
     e.preventDefault();
   
     if (titulo.trim().length < 3) {
-      alert("O título dee ter pelo menos 3 caracteres")
+      setNotifyUser({
+        titleNote: "Aviso",
+        textNote:"O título deve conter pelo menos 3 caracteres",
+        imgIcon:"warning",
+        imgAlt:"Imagem de ilustração de aviso. Moça em frente a um símbolo de exclamação.",
+        showMessage: true
+      })
+      //Atualiza a tela
+      return;
     }
-
+    setShowSpinner(true)
     try {
       const retorno = await api.post(eventsTypeResource, {
         titulo: titulo
       });
+      setNotifyUser({
+        titleNote: "Sucesso",
+        textNote:"Tipo Evento cadastrado com sucesso",
+        imgIcon:"success",
+        imgAlt:"Imagem de ilustração de sucesso. Moça em frente a um símbolo de exclamação.",
+        showMessage: true
+      })
       setTitulo("");
-    } catch (e) {
-      alert("Deu ruim no submit")
+      const buscaEventos = await api.get(eventsTypeResource)
+      setTiposEvento(buscaEventos.data); //aqui retorna um array, então de boa!
+    } 
+    catch (e) {
+      setNotifyUser({
+        titleNote: "Aviso",
+        textNote:"Não foi possível cadastrar um tipo de evento",
+        imgIcon:"warning",
+        imgAlt:"Imagem de ilustração de aviso. Moça em frente a um símbolo de exclamação.",
+        showMessage: true
+      })
+      setShowSpinner(false)
     }
-   
+    
   }
-
-
-
-// function atualizaEventosTela(idEvent)
+  
+  
+  
+  // function atualizaEventosTela(idEvent)
 // {
 //   const xpto = tiposEvento.filter((t) => {
 //     return t.idEvent !== idEvent 
@@ -64,14 +96,44 @@ const TiposEvento = () => {
 //cadastrar a atualização
  async function handleUpdate(e) {
    e.preventDefault();
+   setShowSpinner(true)
+   try {
+    //Atualizar na api
+    const retorno = await api.put(eventsTypeResource+"/"+idEvento, {
+      titulo : titulo
+    }) 
+  
+    //o id está no state
+    if (retorno.status == 204) {
+      //Reseta o state
 
 
+      //Notifica o usuário
+      setNotifyUser({
+         titleNote:"Sucesso",
+         textNote:"Atualizado com sucesso",
+         imgIcon:"success",
+         imgAlt:"Imagem de ilustração de sucesso. Moça segurando um balção com símbolo de confirmação ok",
+         showMessage: true
+     }) 
+
+     const buscaEventos = await api.get(eventsTypeResource)
+
+     setTiposEvento(buscaEventos.data)
+  
+     editActionAbort();
+    }
+   } catch (error) {
+    console.log(error);
+   }
+   setShowSpinner(false)
   }
 
   
   //mostra o form de edição
  async function showUpdateForm(idElement)
  {
+  setidEvento(idElement) //preenche o id do elemento para poder editar
    try {
       const promise = await api.get(eventsTypeResource+'/'+idElement)
       console.log(promise.data.titulo)
@@ -85,6 +147,7 @@ const TiposEvento = () => {
   //cancela a tela/ação de edição (volta pra o form de Cadastro)
   function editActionAbort() {
     setNextEvents(false)
+    setidEvento(null) //reseta as variáveis
   }
   
   //apaga o tipo de evento na api
@@ -92,6 +155,7 @@ const TiposEvento = () => {
    if (!window.confirm("Confirma a exclusão")) {
     return;
    }
+   setShowSpinner(true)
     try {
       const promise = await api.delete(eventsTypeResource+'/'+idEelement)
      if (promise.status == 204) {
@@ -99,7 +163,7 @@ const TiposEvento = () => {
      setNotifyUser({
       titleNote:"Sucesso",
        textNote:"Cadastro excluido com sucesso",
-       imgIcon:"sucess",
+       imgIcon:"success",
        imgAlt:
        "Imagem de ilustração de sucesso. Moça segurando um balção com símbolo de confirmação ok",
        showMessage: true
@@ -109,15 +173,20 @@ const TiposEvento = () => {
         const buscaEventos = await api.get(eventsTypeResource)
         // console log(BuscaEvetosData)
         setTiposEvento(buscaEventos.data)
+
+        editActionAbort();
      }
     } catch (error) {
       alert('Cadastrado com sucesso')
     }
+    setShowSpinner(false)
    alert('Deletado com suceeso')
   }
   return (
     <>
     {<Notification {...notifyUser} setNotifyUser={setNotifyUser}/>}
+    {showSpinner ? <Spinner /> : null}
+
       <Main>
         <section className="cadastro-evento-section">
           <Container>
@@ -173,14 +242,16 @@ const TiposEvento = () => {
                     }}
                     />
                  <div className='buttons-editbox'>
-
                     <Button
                     textButton="Atualizar"
                     id="atualizar"
                     name="atualizar"
                     type="button"
-                    className=""
-                     additionalClass="button-component--middle"
+                    className="Atualizar"
+                    additionalClass="button-component--middle"
+                    manipulationFunction={(event) => {
+                      handleUpdate(event)
+                    }}
                     />
 
                     <Button

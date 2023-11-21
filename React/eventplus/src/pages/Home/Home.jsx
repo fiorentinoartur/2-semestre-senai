@@ -10,9 +10,11 @@ import Container from '../../Components/Container/Container'
 import axios from 'axios';
 import api from '../../Services/Service'
 import { nextEventsResource } from '../../Services/Service';
+import Notification from '../../Components/Notification/Notification';
 const Home = () => {
     //dados mocados 
     const [nextEvents, setNextEvents] = useState([]);
+    const[notifyUser, setNotifyUser] = useState();
    // roda somente na inicialização do componente
     useEffect(() => {
         async function getNextEvents() {
@@ -22,13 +24,20 @@ const Home = () => {
                 setNextEvents(dados); //atualiza o state
             }
             catch(error) {
-                alert("Deu ruim na api!")
+                setNotifyUser({
+                    titleNote: "Erro",
+                    textNote:"Não foi possível carregar os próximos eventos",
+                    imgIcon:"danger",
+                    imgAlt:"Imagem de ilustração de erro. Rapaz segurando um balão com símbolo X.",
+                    showMessage: true
+                  })
             }
         }
         getNextEvents(); //Roda a função
     }, []);
     return (
         <Main>
+             {<Notification {...notifyUser} setNotifyUser={setNotifyUser}/>}
             <Banner />
             <section className='proximos-eventos'>
                 <Container>
