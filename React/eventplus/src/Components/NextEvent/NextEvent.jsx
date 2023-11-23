@@ -22,7 +22,7 @@ const NextEvent = ({ title, description, eventDate, idEvento, }) => {
                 data-tooltip-id={idEvento}
                 data-tooltip-content={description}
                 data-tooltip-place="top">
-                    <Tooltip id={idEvento} className='tooltip'/>
+               <Tooltip id={idEvento} className='tooltip'/>
                 {description.substr(0, 15)}...
 
             </p>

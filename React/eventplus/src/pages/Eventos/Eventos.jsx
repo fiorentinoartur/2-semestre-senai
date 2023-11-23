@@ -9,19 +9,22 @@ import ImageIlustrator from '../../Components/ImageIlustrator/ImageIlustrator';
 import { Button, Input, Select } from '../../Components/Form/Form';
 import Table from './Table/Table';
 import api,  {eventsResource} from '../../Services/Service'
+
 //Componente principal Eventos
 const Eventos = () => {
 
     // Estados para controle
     const [titulo, setTitulo] = useState("");
     const [descricao, setDescricao] = useState("")
+    const [data, setData] = useState("")
     const [options, setOptions] = useState([])
+    const [tiposEvento, setTiposEvento] = useState(null)
     const [eventos, setNextEvents] = useState([])
+
 
 
     //Efeito após redenrização para carregar eventos
     useEffect(() => {
-        console.log(options);
         async function loadEvents()
         {
             try {
@@ -33,14 +36,23 @@ const Eventos = () => {
         }
         loadEvents();
     },[]);
+
+    useEffect(() => {
+        dePara();
+      }, []);
+
     function dePara() {
         const arrayOptions = []
-        arrayOptions.forEach((e) => {
-            arrayOptions.push({value: e.value, text: e.text})
+        eventos.forEach((e) => {
+            arrayOptions.push({value: e.idEvento, text: e.nomeEvento})
         })
         setOptions(arrayOptions);
     }
     
+    function handleSubmit(e)
+    {
+        e.preventDefault()
+    }
     return (
         <>
             <Main>
@@ -52,9 +64,8 @@ const Eventos = () => {
                             <form
                                 action=""
                                 className='ftipo-evento'
-                                onSubmit=""
+                                onSubmit={handleSubmit}
                             >
-
                                 {/* Form de Edição */}
                                 <>
                                     <Input
@@ -79,20 +90,20 @@ const Eventos = () => {
                                     name="Eventos"
                                     id="eventos"
                                     required="required"
-                                    manipulationFunction=""
                                     options={options}
-                                   
+                                    value={tiposEvento}
+                                    manipulationFunction={(e) => setTiposEvento(e.target.value)}
                                     />
                     
                             
                                     <Input
-                                        id="Titulo"
+                                        id="data"
                                         placeholder="Data do Evento"
-                                        name="Titulo"
+                                        name="data"
                                         type="date"
                                         required="required"
-                                        value={titulo}
-                                        manipulationFunction={(e) => setTitulo(e.target.value)}
+                                        value={data}
+                                        manipulationFunction={(e) => setData(e.target.value)}
                                     />
 
                                     <Button

@@ -12,6 +12,11 @@
     src: url(../../../assets/fonts/Poppins/Poppins-Regular.ttf);
 }
 
+.tooltip {
+    color: #fff !important;
+    background-color: blue !important;
+  }
+
 /* Smartphone */
 .table-data {
     /* table */
