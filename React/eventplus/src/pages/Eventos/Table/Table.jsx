@@ -52,19 +52,19 @@ const Table = ({ dados, fnDelete = null, fnUpdate = null }) => {
                   alt=""
                   onClick={(e) => {
                     //fnUpdate(e.target.getAttribute('idtipoevento'))
-                    fnUpdate(tp.idTipoEvento)
+                    fnUpdate(tp.idEvento)
                   }}
                 />
               </td>
 
               <td className="table-data__data table-data__data--little">
                 <img
-                  idtipoevento={tp.idTipoEvento}
+                  idevento={tp.idEvento}
                   className="table-data__icon"
                   src={trashDelete}
                   alt=""
                   onClick={(e) => {
-                    fnDelete(e.target.getAttribute('idtipoevento'))
+                    fnDelete(e.target.getAttribute('idevento'))
                   }}
 
                 />

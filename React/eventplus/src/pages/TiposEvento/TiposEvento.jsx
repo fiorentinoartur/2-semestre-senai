@@ -226,7 +226,7 @@ const TiposEvento = () => {
                         textButton="Cancelar"
                         id="cancelar"
                         name="cancelar"
-                        type="button"
+                            type="button"
                         manipulationFunction={editActionAbort}
                         additionalClass="button-component--middle"
                       />
