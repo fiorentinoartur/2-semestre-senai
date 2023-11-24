@@ -142,10 +142,12 @@ const Eventos = () => {
                     showMessage: true
                 });
             }
+            editActionAbort(true)
 
             // Atualização da lista de eventos
             const searchEvents = await api.get(eventsResource);
             setNextEvents(searchEvents.data);
+            
         } catch (error) {
             // Notificação de erro
             setNotifyUser({
@@ -169,7 +171,7 @@ const Eventos = () => {
             setTitulo(promise.data.nomeEvento);
             setDescricao(promise.data.descricao);
             setTiposEvento(promise.data.idTipoEvento);
-            setData(dateFormatDbToView(promise.data.dataEvento));
+            setData(new Date((promise.data.dataEvento)).toLocaleDateString('sv-SE'));
         } catch (error) {
             // Tratamento de erro
         }
@@ -248,7 +250,7 @@ const Eventos = () => {
                                             required="required"
                                             options={options}
                                             value={tiposEvento}
-                                            defaultValue={tiposEvento}
+                                           // defaultValue={tiposEvento}
                                             manipulationFunction={(e) => setTiposEvento(e.target.value)}
                                         />
 

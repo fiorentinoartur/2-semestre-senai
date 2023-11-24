@@ -1,10 +1,22 @@
 import React from 'react';
 import Titulo from '../../Components/Titulo/Titulo';
+import Logo from '../../assets/icons/logo-pink.svg'
+import Container from '../../Components/Container/Container';
 const Login = () => {
+
     return (
-        <div>
-            <Titulo titleText={"Página de Login"} />
-        </div>
+        <>
+        <section className="login">
+            <Container>
+            <form action="">
+                <img
+                    src={Logo}
+                    alt="" />
+            </form>
+
+            </Container>
+        </section>
+        </>
     );
 };
 
