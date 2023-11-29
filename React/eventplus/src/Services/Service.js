@@ -12,6 +12,9 @@ export const eventsTypeResource = '/TiposEvento'
 //Rota para as próximas instituições
 export const instituicoesResource = 'Instituicao'
 
+//Rota para o Login
+export const loginResource = 'Login'
+
 const apiPort = '7118';
 const localApiUri = `https://localhost:${apiPort}/api/`;
 const externalApiUri = null;
