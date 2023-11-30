@@ -1,10 +1,11 @@
 // Importando as dependências e componentes necessários de arquivos externos
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ImageIllustrator from "../../Components/ImageIlustrator/ImageIlustrator";
 import logo from "../../assets/icons/logo-pink.svg";
 import { Input, Button } from "../../Components/Form/Form";
 import man from "../../assets/icons/login.svg";
-import api, { loginResource } from '../../Services/Service'; // Supondo que esses são serviços relacionados à API
+import api, { loginResource } from '../../Services/Service'; 
+import { Navigate, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { UserContext, userDecodeToken } from "../../context/AuthContext";
 
@@ -20,6 +21,12 @@ const LoginPage = () => {
   // Acessando os dados globais do usuário e a função de definição do contexto
   const { userData, setUserData } = useContext(UserContext);
 
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if(userData.nome) Navigate("/login")
+},[userData])
   // Lidando com a submissão do formulário
   async function handleSubmit(e) {
     e.preventDefault();
@@ -43,9 +50,13 @@ const LoginPage = () => {
 
         // Armazenando o token do usuário no armazenamento local
         localStorage.setItem("token", JSON.stringify(userFullToken));
+
+        navigate("/")
       } catch (e) {
         // Lidando com erros na requisição da API
-        return console.log('Erro: ', e);
+       alert('Verifique os dados e a conexão com a internet')
+       console.log("ERROS NO LOGIN DI USUÁRIO");
+       console.log(e);
       }
     } else {
       // Alertando o usuário se os dados do formulário estiverem incompletos
@@ -104,7 +115,7 @@ const LoginPage = () => {
 
             {/* Botão para submissão do formulário */}
             <Button
-              buttonText="Login"
+              textButton="Login"
               id="btn-login"
               name="btn-login"
               type="submit"

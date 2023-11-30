@@ -13,7 +13,7 @@ export const userDecodeToken = (theToken) => {
     const decoded = jwtDecode(theToken);
 
     // Retornando um objeto com informações do usuário, incluindo papel (role), nome e o próprio token
-    return { role: decoded.role, nome: decoded.name, token: theToken };
+    return { idUsuario: decoded.jti, role: decoded.role, nome: decoded.name, token: theToken };
 }
 
 

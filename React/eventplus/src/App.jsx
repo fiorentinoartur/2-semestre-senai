@@ -8,13 +8,17 @@ import Rotas from './routes';
 import { UserContext } from './context/AuthContext';
 
 // Importa a função 'useState' do React
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Componente principal do aplicativo
 const App = () => {
     // Define um estado local 'userData' e uma função 'setUserData' usando o hook 'useState'
     const [userData, setUserData] = useState({});
 
+    useEffect(() => {
+            const token = localStorage.getItem("token");
+                setUserData(token === null ? {} : JSON.parse(token))                                                                                           
+    },[])
     // Renderiza o componente 'Rotas' dentro do contexto de usuário 'UserContext.Provider'
     return (
         <UserContext.Provider value={{ userData, setUserData }}>
