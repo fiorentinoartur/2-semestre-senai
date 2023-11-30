@@ -1,53 +1,63 @@
+// Importando as dependências e componentes necessários de arquivos externos
 import React, { useContext, useState } from "react";
 import ImageIllustrator from "../../Components/ImageIlustrator/ImageIlustrator";
 import logo from "../../assets/icons/logo-pink.svg";
 import { Input, Button } from "../../Components/Form/Form";
-import man from "../../assets/icons/login.svg"
-import api, {loginResource} from '../../Services/Service'
+import man from "../../assets/icons/login.svg";
+import api, { loginResource } from '../../Services/Service'; // Supondo que esses são serviços relacionados à API
 import "./Login.css";
 import { UserContext, userDecodeToken } from "../../context/AuthContext";
 
+// Definindo o componente LoginPage
 const LoginPage = () => {
   
-const [user, setUser] = useState(
-    {
+  // Configurando o estado para os dados do usuário com valores padrão
+  const [user, setUser] = useState({
     email: "artur@comum.com",
     senha: ""
-});
+  });
 
-const {userData, setUserData} = useContext(UserContext) //importa os dados globais
+  // Acessando os dados globais do usuário e a função de definição do contexto
+  const { userData, setUserData } = useContext(UserContext);
 
-async function handleSubmit(e) {
+  // Lidando com a submissão do formulário
+  async function handleSubmit(e) {
     e.preventDefault();
 
+    // Verificando se a senha atende a um requisito mínimo de comprimento
     if (user.senha.length >= 3) {
-        try {
-            const promise = await api.post(loginResource,{
-                email: user.email,
-                senha: user.senha
-            })
-            console.log("Dados do Usuário");
-            console.log(promise.data.token);
+      try {
+        // Fazendo uma requisição POST para a API para login do usuário
+        const promise = await api.post(loginResource, {
+          email: user.email,
+          senha: user.senha
+        });
 
-            const userFullToken = userDecodeToken(promise.data.token);
-            setUserData(userFullToken)
-            localStorage.setItem("token", JSON.stringify(userFullToken))
+        // Registrando o token do usuário no console
+        console.log("Dados do Usuário");
+        console.log(promise.data.token);
 
-        } catch (e) {
-            return console.log('Erro: ', e);
+        // Decodificando e definindo os dados do usuário a partir do token recebido
+        const userFullToken = userDecodeToken(promise.data.token);
+        setUserData(userFullToken);
 
-        }
-
+        // Armazenando o token do usuário no armazenamento local
+        localStorage.setItem("token", JSON.stringify(userFullToken));
+      } catch (e) {
+        // Lidando com erros na requisição da API
+        return console.log('Erro: ', e);
+      }
+    } else {
+      // Alertando o usuário se os dados do formulário estiverem incompletos
+      alert('Preencha os dados corretamente');
     }
-    else
-    {
-        alert('Preencha os dados corretamente')
-    }
-  
-}
+  }
+
+  // Renderizando a interface do usuário da página de login
   return (
     <div className="layout-grid-login">
       <div className="login">
+        {/* Seção de ilustração */}
         <div className="login__illustration">
           <div className="login__illustration-rotate"></div>
           <ImageIllustrator
@@ -57,10 +67,13 @@ async function handleSubmit(e) {
           />
         </div>
 
+        {/* Seção de formulário */}
         <div className="frm-login">
           <img src={logo} className="frm-login__logo" alt="" />
 
+          {/* Formulário para login do usuário */}
           <form className="frm-login__formbox" onSubmit={handleSubmit}>
+            {/* Campo de entrada para nome de usuário (email) */}
             <Input
               additionalClass="frm-login__entry"
               type="email"
@@ -68,9 +81,11 @@ async function handleSubmit(e) {
               name="login"
               required={true}
               value={user.email}
-              manipulationFunction={(e) => {setUser({...user, email: e.target.value.trim()})}}
-              placeholder="Username"
+              manipulationFunction={(e) => { setUser({ ...user, email: e.target.value.trim() }) }}
+              placeholder="Nome de Usuário"
             />
+            
+            {/* Campo de entrada para senha */}
             <Input
               additionalClass="frm-login__entry"
               type="password"
@@ -78,22 +93,23 @@ async function handleSubmit(e) {
               name="senha"
               required={true}
               value={user.senha}
-              manipulationFunction={(e) => {
-                setUser({...user,senha: e.target.value})}}
+              manipulationFunction={(e) => { setUser({ ...user, senha: e.target.value }) }}
               placeholder="****"
             />
 
+            {/* Link para recuperação de senha */}
             <a href="" className="frm-login__link">
               Esqueceu a senha?
             </a>
 
+            {/* Botão para submissão do formulário */}
             <Button
               buttonText="Login"
               id="btn-login"
               name="btn-login"
               type="submit"
               additionalClass="frm-login__button"
-              manipulationFunction={()=>{}}
+              manipulationFunction={() => { }}
             />
           </form>
         </div>
@@ -102,4 +118,5 @@ async function handleSubmit(e) {
   );
 };
 
+// Exportando o componente LoginPage
 export default LoginPage;
