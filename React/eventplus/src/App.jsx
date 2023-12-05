@@ -2,7 +2,7 @@
 import './App.css';
 
 // Importa o componente de rotas definido em './routes'
-import Rotas from './routes';
+import Rotas from './routes/routes';
 
 // Importa o contexto de usuário 'UserContext'
 import { UserContext } from './context/AuthContext';

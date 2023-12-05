@@ -13,7 +13,7 @@ const Header = () => {
                 <div className="header-flex">
                     <img
                         className='headerpage__menubar'
-                        src={menubar}                                                     
+                        src={menubar}                                                   
                         alt="Imagem menu de barras. Serve para exibir ou esconder o menu no smartphone."
                         onClick={() => {setExibeNavbar(true)}} />
 
