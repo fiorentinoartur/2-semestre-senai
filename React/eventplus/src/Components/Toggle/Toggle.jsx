@@ -1,20 +1,18 @@
 import React from "react";
 
-import "./Toggle.css"
-const Toggle = ({ fnManipulator = null }) => {
-    return (
-        <>
-            <input
-                type="toggle__switch-check"
-                id="switch-check"
-                className="toggle__switch-check" />
+import "./Toggle.css";
 
-            <label htmlFor="switch-check" className="toggle" onClick={fnManipulator}>
-                <div className="toggle__swithc"></div>
-            </label>
-        </>
+const Toggle = ({manipulationFunction = null, toggleActive = false}) => { 
+    const fakeId =Math.random();
+  return (
+    <>
+      <input type="checkbox" id={`switch-check${fakeId}`} className="toggle__switch-check" />
 
-    )
-}
+      <label className={`toggle ${toggleActive ? "toggle--active" : ""}`} htmlFor="switch-check" onClick={manipulationFunction}>
+        <div className={`toggle__switch ${toggleActive ? "toggle__switch--active" : ""}`}></div>
+      </label>
+    </>
+  );
+};
 
 export default Toggle;

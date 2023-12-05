@@ -1,11 +1,11 @@
 import React from "react";
 import comentaryIcon from "../../../assets/icons/comentary-icon.svg";
-import trashDelete from "../../../assets/icons/trash-delete.svg";
+
 import { dateFormatDbToView } from "../../../Utils/stringFunctions";
 import Toggle from "../../../Components/Toggle/Toggle";
 // importa a biblioteca de tootips ()
 import "react-tooltip/dist/react-tooltip.css";
-import { Tooltip } from "react-tooltip";
+
 
 import "./TableEva.css";
 

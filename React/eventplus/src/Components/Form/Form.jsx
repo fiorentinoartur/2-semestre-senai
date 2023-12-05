@@ -63,7 +63,6 @@ className={`input-component ${additionalClass}`}
 onChange={manipulationFunction}
 value={defaultValue}
 >
-    {/* <option value="">Selecione</option> */}
     <option>Selecione</option>
      {options.map((o) => {
         return (
