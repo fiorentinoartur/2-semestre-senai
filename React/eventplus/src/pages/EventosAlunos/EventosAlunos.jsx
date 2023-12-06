@@ -3,7 +3,7 @@ import './EventosAlunos.css'
 import { useContext } from "react";
 import { useState } from "react";
 import { UserContext } from "../../context/AuthContext"
-import api, { eventsResource, myEventsResource } from "../../Services/Service"
+import api, { eventsResource, myEventsResource, presenceEventResource } from "../../Services/Service"
 import Main from "../../Components/Main/Main";
 import Container from "../../Components/Container/Container"
 import Titulo from "../../Components/Titulo/Titulo"
@@ -28,67 +28,81 @@ const EventosAlunos = () => {
     const { userData, setUserData } = useContext(UserContext);
 
     useEffect(() => {
-        async function loadEventsType() {
-            setShowSpinner(true)
-
-            if (tipoEvento === "1") {
-                //chamar api de todos os eventos
-                try {
-                    const retorno = await api.get(eventsResource);
-                    setEventos(retorno.data)
-                    console.log(retorno.data);
-
-                } catch (err) {
-                    //colocar o notification
-                    console.log("Erro na APi");
-                    console.log(err);
-                }
-            }
-            else if (tipoEvento === "2") {
-                //chamar a api dos meus eventos
-                try {
-                    const retorno = await api.get(`${myEventsResource}/${userData.userId}`)
-                    console.log(`${myEventsResource}/${userData.userId}`);
-                    console.log(retorno.data);
-                    const arrEventos = [];
-
-                    retorno.data.forEach(e => {
-                        arrEventos.push(e.evento)
-                    });
-
-                    setEventos(arrEventos)
-
-                } catch (error) {
-                    console.log("Erro na API");
-                    console.log(error);
-                }
-            }
-            else {
-                setEventos([]);
-            }
-        }
+  
 
 
         setShowModal();
-        setEventos([]);
 
         loadEventsType();
         setShowSpinner(false);
-    }, [tipoEvento]);
+    }, [tipoEvento, userData.userId]);
 
-const verificaPresenca = (arrAllEvents, eventsUser) => {
-    for (let x = 0; x < arrAllEvents.length; x++) {
-      for (let i = 0; i < eventsUser.length; i++) {
-      if(arrAllEvents[x].idEvento === eventsUser[i].idEvento )
-      {
-        arrAllEvents[x].situacao = true;
-        break;
-      }
-        
-      }
-        
+    async function loadEventsType() {
+        setShowSpinner(true)
+
+        if (tipoEvento === "1") {
+            //chamar api de todos os eventos
+            try {
+                const todosEventos = await api.get(eventsResource);
+                const meusEventos = await api.get(`${myEventsResource}/${userData.userId}`)
+
+                const eventosMarcados = verificaPresenca(todosEventos.data, meusEventos.data);
+
+                setEventos(eventosMarcados)
+
+                console.clear();
+                console.log("TODOS EVENTOS");
+                console.log(todosEventos.data);
+                console.log("Meus eventos");
+
+                console.log(meusEventos.data);
+                console.log("EVENTOS MARCADOS");
+                console.log(eventosMarcados);
+
+            } catch (err) {
+                //colocar o notification
+                console.log("Erro na APi aqui no useEffect");
+                console.log(err);
+            }
+        }
+        else if (tipoEvento === "2") {
+            //chamar a api dos meus eventos
+            try {
+                const retorno = await api.get(`${myEventsResource}/${userData.userId}`)
+                console.log(`${myEventsResource}/${userData.userId}`);
+                console.log(retorno.data);
+                const arrEventos = [];
+
+                retorno.data.forEach(e => {
+                    arrEventos.push({ ...e.evento, situacao: e.situacao })
+                });
+
+                setEventos(arrEventos)
+
+            } catch (error) {
+                console.log("Erro na API");
+                console.log(error);
+            }
+        }
+        else {
+            setEventos([]);
+        }
     }
-}
+
+    const verificaPresenca = (arrAllEvents, eventsUser) => {
+        for (let x = 0; x < arrAllEvents.length; x++) {
+            for (let i = 0; i < eventsUser.length; i++) {
+                if (arrAllEvents[x].idEvento === eventsUser[i].evento.idEvento) {
+                    arrAllEvents[x].situacao = true;
+                    arrAllEvents[x].idPresencaEvento = eventsUser[i].idPresencaEvento
+                    break;
+                }
+
+            }
+
+        }
+        return arrAllEvents;
+    }
     function myEvents(tpEvent) {
         setTipoEvento(tpEvent)
     }
@@ -105,8 +119,42 @@ const verificaPresenca = (arrAllEvents, eventsUser) => {
     const comentaryRemove = () => {
         alert("Remover comentário");
     }
-    function handleConnect() {
-        alert("Desenvolver a função conectar evento")
+    async function handleConnect(eventId, whatTheFunction, presencaId = null) {
+        if (whatTheFunction === "connect") {
+            try {
+                const promise = await api.post(presenceEventResource, {
+                    situacao: true,
+                    idUsuario: userData.userId,
+                    idEvento: eventId
+                })
+
+                if (promise.status === 201) {
+                    loadEventsType()
+                    alert("Presença confirmada, parabéns")
+                }
+
+                setTipoEvento("1")
+                const todosEventos = await api.get(eventsResource)
+                setEventos(todosEventos.data);
+            } catch (error) {
+
+            }
+            return;
+        }
+        console.clear();
+
+try {
+    const unconnect = await api.delete(`${presenceEventResource}/${presencaId}`)
+    if (unconnect.status === 204) {
+        alert("Desconectado evento")
+        const todosEventos = await api.get(eventsResource)
+        setEventos(todosEventos.data)
+    }
+} catch (error) {
+    console.log(error);
+}
+
+   
     }
     return (
         <>

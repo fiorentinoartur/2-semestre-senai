@@ -15,8 +15,11 @@ export const instituicoesResource = '/Instituicao'
 //Rota para o Login
 export const loginResource = '/Login'
 
-//Rota para evento de alunos
+//Rota para evento do alunos
 export const myEventsResource = '/PresencasEventos/ListarMinhas'
+
+//Rota para presencas
+export const presenceEventResource = "/PresencasEventos"
 
 const apiPort = '7118';
 const localApiUri = `https://localhost:${apiPort}/api`;
