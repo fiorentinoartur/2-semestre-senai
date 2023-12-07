@@ -3,7 +3,7 @@ import './EventosAlunos.css'
 import { useContext } from "react";
 import { useState } from "react";
 import { UserContext } from "../../context/AuthContext"
-import api, { eventsResource, myEventsResource, presenceEventResource } from "../../Services/Service"
+import api, { eventsResource, myEventsResource, presenceEventResource, commentaryEvent } from "../../Services/Service"
 import Main from "../../Components/Main/Main";
 import Container from "../../Components/Container/Container"
 import Titulo from "../../Components/Titulo/Titulo"
@@ -28,25 +28,26 @@ const EventosAlunos = () => {
     const { userData, setUserData } = useContext(UserContext);
 
     useEffect(() => {
-  
+
 
 
         setShowModal();
 
         loadEventsType();
-        setShowSpinner(false);
     }, [tipoEvento, userData.userId]);
 
     async function loadEventsType() {
-        setShowSpinner(true)
-
+        
         if (tipoEvento === "1") {
             //chamar api de todos os eventos
+            setShowSpinner(true)
             try {
                 const todosEventos = await api.get(eventsResource);
                 const meusEventos = await api.get(`${myEventsResource}/${userData.userId}`)
 
-                const eventosMarcados = verificaPresenca(todosEventos.data, meusEventos.data);
+                const eventosMarcados = verificaPresenca(
+                    todosEventos.data,
+                    meusEventos.data);
 
                 setEventos(eventosMarcados)
 
@@ -64,9 +65,12 @@ const EventosAlunos = () => {
                 console.log("Erro na APi aqui no useEffect");
                 console.log(err);
             }
+            setShowSpinner(false)
+          
         }
         else if (tipoEvento === "2") {
             //chamar a api dos meus eventos
+            setShowSpinner(true)
             try {
                 const retorno = await api.get(`${myEventsResource}/${userData.userId}`)
                 console.log(`${myEventsResource}/${userData.userId}`);
@@ -74,7 +78,7 @@ const EventosAlunos = () => {
                 const arrEventos = [];
 
                 retorno.data.forEach(e => {
-                    arrEventos.push({ ...e.evento, situacao: e.situacao })
+                    arrEventos.push({ ...e.evento, situacao: e.situacao, idPresencaEvento: e.idPresencaEvento })
                 });
 
                 setEventos(arrEventos)
@@ -83,6 +87,7 @@ const EventosAlunos = () => {
                 console.log("Erro na API");
                 console.log(error);
             }
+            setShowSpinner(false)
         }
         else {
             setEventos([]);
@@ -108,16 +113,32 @@ const EventosAlunos = () => {
     }
 
 
-    async function loadMyComentary(idComentary) {
-        return "????";
-    }
 
     const showHidelModal = () => {
         setShowModal(showModal ? false : true)
     };
 
-    const comentaryRemove = () => {
+    async function loadMyComentary(idComentary) {
+        return "????";
+    }
+
+    const commentaryRemove = () => {
         alert("Remover comentário");
+    }
+
+    const postMyCommentary = async (eventId, commentarysEvent) => {
+        try {
+            console.log(commentarysEvent);
+            const promise = await api.post(commentaryEvent,{
+              idUsuario: userData.userId,
+              idEvento: eventId,
+              exibe:true,
+              descricao: commentarysEvent
+            })
+        } catch (error) {
+            console.log(error);
+        }
+
     }
     async function handleConnect(eventId, whatTheFunction, presencaId = null) {
         if (whatTheFunction === "connect") {
@@ -143,18 +164,16 @@ const EventosAlunos = () => {
         }
         console.clear();
 
-try {
-    const unconnect = await api.delete(`${presenceEventResource}/${presencaId}`)
-    if (unconnect.status === 204) {
-        alert("Desconectado evento")
-        const todosEventos = await api.get(eventsResource)
-        setEventos(todosEventos.data)
-    }
-} catch (error) {
-    console.log(error);
-}
-
-   
+        try {
+            const unconnect = await api.delete(`${presenceEventResource}/${presencaId}`)
+            if (unconnect.status === 204) {
+                loadEventsType()
+                alert("Desconectado evento")
+            }
+        } catch (error) {
+            console.log("Erroa ao desconectar o usuário do evento");
+            console.log(error);
+        }
     }
     return (
         <>
@@ -189,7 +208,9 @@ try {
                 <Modal
                     userId={userData.userId}
                     showHideModal={showHidelModal}
-                    fnDelete={comentaryRemove}
+                    fnGet={loadMyComentary}
+                    fnPost={postMyCommentary}
+                    fnDelete={commentaryRemove}
                 />
             ) : null}
         </>

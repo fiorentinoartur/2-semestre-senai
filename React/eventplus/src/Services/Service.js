@@ -21,6 +21,9 @@ export const myEventsResource = '/PresencasEventos/ListarMinhas'
 //Rota para presencas
 export const presenceEventResource = "/PresencasEventos"
 
+//Rota para comentários
+export const commentaryEvent = "/ComentariosEvento"
+
 const apiPort = '7118';
 const localApiUri = `https://localhost:${apiPort}/api`;
 const externalApiUri = null;

@@ -20,7 +20,7 @@ namespace webapi.event_.Controllers
 
         //Controler
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try
