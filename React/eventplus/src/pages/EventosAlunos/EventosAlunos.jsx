@@ -11,6 +11,7 @@ import { Select } from "../../Components/Form/Form"
 import TableEvA from "./TableEva/TableEva";
 import Spinner from "../../Components/Spinner/Spinner";
 import Modal from "../../Components/Modal/Modal"
+import { isExists } from "date-fns";
 const EventosAlunos = () => {
 
     const [eventos, setEventos] = useState([]);
@@ -24,8 +25,11 @@ const EventosAlunos = () => {
 
     const [showSpinner, setShowSpinner] = useState(false);
     const [showModal, setShowModal] = useState(false)
+    const [comentary, setComentary] = useState("")
+ 
 
     const { userData, setUserData } = useContext(UserContext);
+
 
     useEffect(() => {
 
@@ -37,7 +41,7 @@ const EventosAlunos = () => {
     }, [tipoEvento, userData.userId]);
 
     async function loadEventsType() {
-        
+
         if (tipoEvento === "1") {
             //chamar api de todos os eventos
             setShowSpinner(true)
@@ -66,7 +70,7 @@ const EventosAlunos = () => {
                 console.log(err);
             }
             setShowSpinner(false)
-          
+
         }
         else if (tipoEvento === "2") {
             //chamar a api dos meus eventos
@@ -114,32 +118,43 @@ const EventosAlunos = () => {
 
 
 
-    const showHidelModal = () => {
+    const showHideModal = (idEvent) => {
         setShowModal(showModal ? false : true)
+        setUserData({ ...userData, idEvento: idEvent })
     };
 
-    async function loadMyComentary(idComentary) {
-        return "????";
+    async function loadMyComentary() {
+        try {
+            const promise = await api.get(`${commentaryEvent}?idUsuario=${userData.userId}&idEvento=${userData.idEvento}`)
+
+            (promise.data[0].descricao == "Não informado. Não informado. Não informado.") ? "teste" : setComentary(promise.data[0].descricao)
+          
+
+
+        } catch (error) {
+            console.log("Deu erro aqui");
+        }
     }
 
     const commentaryRemove = () => {
         alert("Remover comentário");
     }
 
-    const postMyCommentary = async (eventId, commentarysEvent) => {
-        try {
-            console.log(commentarysEvent);
-            const promise = await api.post(commentaryEvent,{
-              idUsuario: userData.userId,
-              idEvento: eventId,
-              exibe:true,
-              descricao: commentarysEvent
-            })
-        } catch (error) {
-            console.log(error);
-        }
 
-    }
+    // const postMyCommentary = async (eventId, commentarysEvent) => {
+    //     try {
+    //         console.log(commentarysEvent);
+    //         const promise = await api.post(commentaryEvent,{
+    //           idUsuario: userData.userId,
+    //           idEvento: eventId,
+    //           exibe:true,
+    //           descricao: commentarysEvent
+    //         })
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+
+    // }
     async function handleConnect(eventId, whatTheFunction, presencaId = null) {
         if (whatTheFunction === "connect") {
             try {
@@ -195,9 +210,9 @@ const EventosAlunos = () => {
                     <TableEvA
                         dados={eventos}
                         fnConnect={handleConnect}
-                        fnShowModal={() => {
-                            showHidelModal();
-                        }}
+                        fnShowModal={
+                            showHideModal
+                        }
                     />
                 </Container>
             </Main>
@@ -206,11 +221,12 @@ const EventosAlunos = () => {
 
             {showModal ? (
                 <Modal
-                    userId={userData.userId}
-                    showHideModal={showHidelModal}
+                    showHideModal={showHideModal}
                     fnGet={loadMyComentary}
-                    fnPost={postMyCommentary}
+                    //   fnPost={postMyCommentary}
                     fnDelete={commentaryRemove}
+                    comentaryText={comentary}
+
                 />
             ) : null}
         </>

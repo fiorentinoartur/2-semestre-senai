@@ -10,6 +10,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import "./TableEva.css";
 
 const TableEvA = ({ dados, fnConnect = null, fnShowModal = null }) => {
+  
   return (
     <table className="tbal-data">
       <thead className="tbal-data__head">
@@ -39,10 +40,10 @@ const TableEvA = ({ dados, fnConnect = null, fnShowModal = null }) => {
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                 <img
                   className="tbal-data__icon"
-                  idevento={e.idEvento}
+                  // idevento={e.idEvento}
                   src={comentaryIcon}
                   alt=""
-                  onClick={fnShowModal}
+                  onClick={() => {fnShowModal(e.idEvento)}}
                 />
 
                 <Toggle 

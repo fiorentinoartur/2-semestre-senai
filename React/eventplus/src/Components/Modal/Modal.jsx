@@ -1,24 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import trashDelete from "../../assets/images/trash-delete-red.png";
 
 import { Button, Input } from "../Form/Form";
 import "./Modal.css";
 import { commentaryEvent } from "../../Services/Service";
+import { useContext } from "react";
+import { UserContext } from "../../context/AuthContext";
 
 const Modal = ({
   modalTitle = "Feedback",
   comentaryText = "Não informado. Não informado. Não informado.",
-  userId = null,
-  showHideModal = false,
+  // userId = null,
+  showHideModal = null,
+  //idEvento = null,
   fnDelete = null,
   fnNewCommentary = null,
   fnGet = null,
   fnPost = null
 
 }) => {
+  const { userData } = useContext(UserContext)
+  const [comentaryDesc, setComentaryDesc] = useState("");
+
+
   useEffect(() => {
-    async function carregarDados()
-    {
+    async function carregarDados() {
       fnGet()
     }
 
@@ -28,10 +34,10 @@ const Modal = ({
   return (
     <div className="modal">
       <article className="modal__box">
-        
+
         <h3 className="modal__title">
           {modalTitle}
-          <span className="modal__close" onClick={()=> showHideModal(true)}>x</span>
+          <span className="modal__close" onClick={() => showHideModal(true)}>x</span>
         </h3>
 
         <div className="comentary">
@@ -53,8 +59,9 @@ const Modal = ({
         <Input
           placeholder="Escreva seu comentário..."
           className="comentary__entry"
+          value={comentaryDesc}
           manipulationFunction={(e) => {
-            comentaryText = e.target.value
+            setComentaryDesc(e.target.value)
           }}
         />
 
@@ -62,12 +69,7 @@ const Modal = ({
           textButton="Comentar"
           additionalClass="comentary__button"
           manipulationFunction={() => {
-          fnPost(
-            comentaryText,
-            id
-
-
-          )
+            fnPost(comentaryDesc, userData.userId, userData.idEvento)
           }}
         />
       </article>
