@@ -10,13 +10,13 @@ import { UserContext } from "../../context/AuthContext";
 const Modal = ({
   modalTitle = "Feedback",
   comentaryText = "Não informado. Não informado. Não informado.",
-  // userId = null,
+   userId = null,
   showHideModal = null,
-  //idEvento = null,
+  idEvento = null,
   fnDelete = null,
-  fnNewCommentary = null,
   fnGet = null,
-  fnPost = null
+  fnPost = null,
+  idComentario = null
 
 }) => {
   const { userData } = useContext(UserContext)
@@ -24,12 +24,13 @@ const Modal = ({
 
 
   useEffect(() => {
-    async function carregarDados() {
-      fnGet()
-    }
+
 
     carregarDados();
   }, [])
+  async function carregarDados() {
+    fnGet(userId, idEvento)
+  }
 
   return (
     <div className="modal">
@@ -46,8 +47,9 @@ const Modal = ({
             src={trashDelete}
             className="comentary__icon-delete"
             alt="Ícone de uma lixeira"
-            onClick={() => {
-              fnDelete()
+            onClick={async() => {
+             await fnDelete(idComentario)
+             await carregarDados();
             }}
           />
 
@@ -68,8 +70,12 @@ const Modal = ({
         <Button
           textButton="Comentar"
           additionalClass="comentary__button"
-          manipulationFunction={() => {
-            fnPost(comentaryDesc, userData.userId, userData.idEvento)
+          manipulationFunction={async() => {
+           await fnPost(comentaryDesc, userData.userId, userData.idEvento)
+
+           await carregarDados();
+
+           setComentaryDesc("")
           }}
         />
       </article>

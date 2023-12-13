@@ -24,9 +24,9 @@ export const presenceEventResource = "/PresencasEventos"
 //Rota para comentários
 export const commentaryEvent = "/ComentariosEvento"
 
-const apiPort = '7118';
-const localApiUri = `https://localhost:${apiPort}/api`;
-const externalApiUri = null;
+//const apiPort = '7118';
+//const localApiUri = `https://localhost:${apiPort}/api`;
+const externalApiUri = "https://eventwebapi-artur.azurewebsites.net/api";
 
 const api = axios.create({
     baseURL:localApiUri

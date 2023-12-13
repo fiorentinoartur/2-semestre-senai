@@ -26,6 +26,8 @@ const EventosAlunos = () => {
     const [showSpinner, setShowSpinner] = useState(false);
     const [showModal, setShowModal] = useState(false)
     const [comentary, setComentary] = useState("")
+    const [idEvento, setIdEvento] = useState("");
+    const [idComentario, setIdComentario] = useState(null);
  
 
     const { userData, setUserData } = useContext(UserContext);
@@ -136,25 +138,43 @@ const EventosAlunos = () => {
         }
     }
 
-    const commentaryRemove = () => {
-        alert("Remover comentário");
-    }
+    const postMyCommentary = async (descricao, idUsuario, idEvento) => {
+        try {
+          const promise = await api.post(commentaryEvent, {
+            descricao: descricao,
+            exibe: true,
+            idUsuario: idUsuario,
+            idEvento: idEvento,
+          });
+    
+          if (promise.status === 200) {
+            alert("Comentário cadastrado com sucesso");
+          }
+        } catch (error) {
+          console.log("Erro ao cadastrar o evento");
+          console.log(error);
+        }
+      };
+    
+      // remove o comentário - delete
+      const commentaryRemove = async (idComentario) => {
+        // alert("Remover o comentário " + idComentario);
+    
+        try {
+          const promise = await api.delete(
+            `${commentaryEvent}/${idComentario}`
+          );
+          if (promise.status === 200) {
+            alert("Evento excluído com sucesso!");
+          }
+        } catch (error) {
+          console.log("Erro ao excluir ");
+          console.log(error);
+        }
+      };
+    
 
-
-    // const postMyCommentary = async (eventId, commentarysEvent) => {
-    //     try {
-    //         console.log(commentarysEvent);
-    //         const promise = await api.post(commentaryEvent,{
-    //           idUsuario: userData.userId,
-    //           idEvento: eventId,
-    //           exibe:true,
-    //           descricao: commentarysEvent
-    //         })
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-
-    // }
+  
     async function handleConnect(eventId, whatTheFunction, presencaId = null) {
         if (whatTheFunction === "connect") {
             try {
@@ -223,9 +243,12 @@ const EventosAlunos = () => {
                 <Modal
                     showHideModal={showHideModal}
                     fnGet={loadMyComentary}
-                    //   fnPost={postMyCommentary}
+                     fnPost={postMyCommentary}
                     fnDelete={commentaryRemove}
                     comentaryText={comentary}
+                    userId={userData.userId}
+                    idEvent={idEvento}
+                    idComentario={idComentario}
 
                 />
             ) : null}

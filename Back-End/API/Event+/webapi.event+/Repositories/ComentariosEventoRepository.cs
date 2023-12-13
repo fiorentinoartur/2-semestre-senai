@@ -135,6 +135,46 @@ namespace webapi.event_.Repositories
 
                 throw;
             }
+
+
+
+        }
+
+
+        public List<ComentariosEvento> ListarExibe()
+        {
+
+            try
+            {
+                return _context.ComentariosEvento
+                    .Select(c => new ComentariosEvento
+                    {
+                        Descricao = c.Descricao,
+                        Exibe = c.Exibe,
+                        IdUsuario = c.IdUsuario,
+                        IdEvento = c.IdEvento,
+
+                        Usuario = new Usuario
+                        {
+                            Nome = c.Usuario!.Nome
+                        },
+
+                        Evento = new Evento
+                        {
+                            NomeEvento = c.Evento!.NomeEvento,
+                            IdEvento = c.IdEvento,
+                        }
+
+                    }).Where(x=> x.Exibe == true).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
         }
     }
 }

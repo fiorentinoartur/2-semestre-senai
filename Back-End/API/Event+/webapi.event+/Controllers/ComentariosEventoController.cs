@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.CognitiveServices.ContentModerator;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using webapi.event_.Domains;
 using webapi.event_.Repositories;
 
@@ -7,12 +10,60 @@ namespace webapi.event_.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-        [Produces("application/json")]
+    [Produces("application/json")]
     public class ComentariosEventoController : ControllerBase
     {
         ComentariosEventoRepository _comentarioRepository = new ComentariosEventoRepository();
 
+        //Início da configuração do Controller para a IA
 
+        //Armazena dados do serviço da API externa(IA - Azure)
+        private readonly ContentModeratorClient _contentModeratorClient;
+
+        /// <summary>
+        /// Construtor que recebe os dados necessários para acesso ao serviço externo
+        /// </summary>
+        /// <param name="contentModeratorClient">objeto do tipo ContentModeratorClient</param>
+        public ComentariosEventoController(ContentModeratorClient contentModeratorClient)
+        {
+            _contentModeratorClient = contentModeratorClient;
+        }
+        [HttpPost("ComentarioIA")]
+        public async Task<IActionResult> PostIA(ComentariosEvento novoComentario)
+        {
+            try
+            {
+                if ((novoComentario.Descricao).IsNullOrEmpty())
+                {
+                    return BadRequest("A descricao do comentário não pode estar vazio ou nulo!");
+                }
+
+                using var stream = new MemoryStream(Encoding.UTF8.GetBytes(novoComentario.Descricao));
+
+                var moderationResult = await _contentModeratorClient.TextModeration
+                    .ScreenTextAsync("text/plain", stream, "por", false,false,null,true);
+
+
+                if(moderationResult.Terms != null)
+                {
+                    novoComentario.Exibe = false;
+
+                    _comentarioRepository.Cadastrar(novoComentario);
+                }
+                else
+                {
+                    novoComentario.Exibe= true;
+
+                    _comentarioRepository.Cadastrar(novoComentario);
+                }
+                return StatusCode(201, novoComentario);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
         [HttpGet]
         public IActionResult Get()
         {
@@ -21,23 +72,35 @@ namespace webapi.event_.Controllers
                 return Ok(_comentarioRepository.Listar());
             }
             catch (Exception ex)
-            { 
-            return BadRequest(ex.Message);
+            {
+                return BadRequest(ex.Message);
             }
 
-                  }
+        }
+        [HttpGet("ListarSomenteExibe")]
+        public IActionResult GetShow() {
+
+            try
+            {
+                return Ok(_comentarioRepository.ListarExibe());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
         [HttpGet("BuscarPorIdUsuario")]
-        public IActionResult GetById(Guid idUsuario, Guid idEvento) 
+        public IActionResult GetById(Guid idUsuario, Guid idEvento)
         {
             try
             {
-                                                  
+
                 return Ok(_comentarioRepository.BuscarPorIdUsuario(idUsuario, idEvento));
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-              }
+            }
         }
 
         [HttpPost]
@@ -49,13 +112,15 @@ namespace webapi.event_.Controllers
 
                 return StatusCode(201, novoComentario);
             }
-            catch (Exception ex) { 
-            
-            return BadRequest(ex.Message);}
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id) 
+        public IActionResult Delete(Guid id)
         {
             try
             {

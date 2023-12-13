@@ -38,13 +38,16 @@ const TableEvA = ({ dados, fnConnect = null, fnShowModal = null }) => {
               </td>
 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
-                <img
-                  className="tbal-data__icon"
-                  // idevento={e.idEvento}
-                  src={comentaryIcon}
-                  alt=""
-                  onClick={() => {fnShowModal(e.idEvento)}}
-                />
+               {new Date(e.dataEvento) < Date.now()? (
+
+                 <img
+                   className="tbal-data__icon"
+                   // idevento={e.idEvento}
+                   src={comentaryIcon}
+                   alt=""
+                   onClick={() => {fnShowModal(e.idEvento)}}
+                 />
+               ): null}
 
                 <Toggle 
                 toggleActive={e.situacao}
