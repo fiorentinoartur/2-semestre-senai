@@ -37,10 +37,19 @@
         }
       }
     },
-    "/api/ComentariosEvento": {
+    "/api/ComentariosEvento/{id}": {
       "get": {
         "tags": [
           "ComentariosEvento"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
         ],
         "responses": {
           "200": {
@@ -48,23 +57,17 @@
           }
         }
       },
-      "post": {
+      "delete": {
         "tags": [
           "ComentariosEvento"
         ],
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/ComentariosEvento"
-            }
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -78,6 +81,15 @@
       "get": {
         "tags": [
           "ComentariosEvento"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "collectionFormat": "multi"
+          }
         ],
         "responses": {
           "200": {
@@ -114,18 +126,24 @@
         }
       }
     },
-    "/api/ComentariosEvento/{id}": {
-      "delete": {
+    "/api/ComentariosEvento": {
+      "post": {
         "tags": [
           "ComentariosEvento"
         ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ComentariosEvento"
+            }
           }
         ],
         "responses": {

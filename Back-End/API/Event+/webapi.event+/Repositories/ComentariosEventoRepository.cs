@@ -22,6 +22,7 @@ namespace webapi.event_.Repositories
                     {
                         Descricao = c.Descricao,
                         Exibe = c.Exibe,
+                        
 
                         Usuario = new Usuario
                         {
@@ -53,6 +54,7 @@ namespace webapi.event_.Repositories
                         Exibe = c.Exibe,
                         IdUsuario = c.IdUsuario,
                         IdEvento = c.IdEvento,
+                       
 
                         Usuario = new Usuario
                         {
@@ -104,7 +106,7 @@ namespace webapi.event_.Repositories
             }
         }
 
-        public List<ComentariosEvento> Listar()
+        public List<ComentariosEvento> Listar( Guid id)
         {
 
             try
@@ -116,6 +118,7 @@ namespace webapi.event_.Repositories
                         Exibe = c.Exibe,
                         IdUsuario = c.IdUsuario,
                         IdEvento = c.IdEvento,
+                        IdComentarioEvento = c.IdComentarioEvento,
 
                         Usuario = new Usuario
                         {
@@ -128,7 +131,7 @@ namespace webapi.event_.Repositories
                             IdEvento = c.IdEvento,
                         }
 
-                    }).ToList();
+                    }).Where(c=> c.IdEvento == id).ToList();
             }
             catch (Exception)
             {
@@ -141,7 +144,8 @@ namespace webapi.event_.Repositories
         }
 
 
-        public List<ComentariosEvento> ListarExibe()
+
+        public List<ComentariosEvento> ListarExibe(Guid id)
         {
 
             try
@@ -153,6 +157,7 @@ namespace webapi.event_.Repositories
                         Exibe = c.Exibe,
                         IdUsuario = c.IdUsuario,
                         IdEvento = c.IdEvento,
+                        IdComentarioEvento = c.IdComentarioEvento,
 
                         Usuario = new Usuario
                         {
@@ -165,7 +170,7 @@ namespace webapi.event_.Repositories
                             IdEvento = c.IdEvento,
                         }
 
-                    }).Where(x=> x.Exibe == true).ToList();
+                    }).Where(x=> x.Exibe == true && x.IdEvento == id).ToList();
             }
             catch (Exception)
             {

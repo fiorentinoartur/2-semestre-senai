@@ -64,12 +64,12 @@ namespace webapi.event_.Controllers
                 return BadRequest(e.Message);
             }
         }
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{id}")]
+        public IActionResult Get(Guid id)
         {
             try
             {
-                return Ok(_comentarioRepository.Listar());
+                return Ok(_comentarioRepository.Listar(id));
             }
             catch (Exception ex)
             {
@@ -78,11 +78,11 @@ namespace webapi.event_.Controllers
 
         }
         [HttpGet("ListarSomenteExibe")]
-        public IActionResult GetShow() {
+        public IActionResult GetShow(Guid id) {
 
             try
             {
-                return Ok(_comentarioRepository.ListarExibe());
+                return Ok(_comentarioRepository.ListarExibe(id));
             }
             catch (Exception e)
             {

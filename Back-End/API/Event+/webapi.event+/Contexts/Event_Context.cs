@@ -31,10 +31,10 @@ namespace webapi.event_.Contexts
         {
             // optionsBuilder.UseSqlServer("Server=NOTE14-S14; Database=event+; User Id= sa; Pwd= Senai@134; TrustServerCertificate=true;");
             // optionsBuilder.UseSqlServer("Server=ARTUR; Database=event+; User Id= sa; Pwd= Arcos@2020; TrustServerCertificate=true;");
-           
+
             //String conexãpo azure
-            
-            optionsBuilder.UseSqlServer
+
+            optionsBuilder.UseSqlServer("Server=tcp:eventmanhaartur-server.database.windows.net,1433;Initial Catalog=eventmanhadatabaseartur;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;User Id= eventmanhaartur-server; Pwd=Senai@134");
            
             base.OnConfiguring(optionsBuilder);
         }
