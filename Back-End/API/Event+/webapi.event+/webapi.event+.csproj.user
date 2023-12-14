@@ -12,6 +12,6 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>webapi.event_.Contexts.Event_Context</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
-    <NameOfLastUsedPublishProfile>C:\Users\49957976885\Desktop\2-semestre-senai\Back-End\API\Event+\webapi.event+\Properties\PublishProfiles\eventwebapi-artur - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\Artur Fiorentino\OneDrive\Área de Trabalho\2-semestre-senai\Back-End\API\Event+\webapi.event+\Properties\PublishProfiles\eventwebapi-artur - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
